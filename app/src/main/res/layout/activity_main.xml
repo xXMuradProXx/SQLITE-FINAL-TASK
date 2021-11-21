@@ -7,12 +7,42 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_width="323dp"
+        android:layout_height="62dp"
+        android:gravity="center"
+        android:text="Welcome to our School app"
+        android:textColor="@color/black"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <ImageView
+        android:id="@+id/img_school"
+        android:layout_width="336dp"
+        android:layout_height="434dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="148dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/school" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="245dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="44dp"
+        android:text="Start"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_school"
+        android:backgroundTint="#6C63FF"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,28 @@
 package com.example.sqlitefinaltask;
 
+import androidx.annotation.NonNull;
+
 public class Student {
     String name;
     String surname;
-    int avg;
+    String st_class;
+    double avg;
+    int id;
 
-    public Student(String name, String surname, int avg) {
+    public Student(int id, String name, String surname, String st_class, double avg) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
+        this.st_class = st_class;
         this.avg = avg;
+    }
+
+    public Student(String name, String surname, String st_class, double avg) {
+        this.name = name;
+        this.surname = surname;
+        this.st_class = st_class;
+        this.avg = avg;
+        id = 0;
     }
 
     public String getName() {
@@ -27,11 +41,29 @@ public class Student {
         this.surname = surname;
     }
 
-    public int getAvg() {
+    public String getSt_class() {
+        return st_class;
+    }
+
+    public void setSt_class(String st_class) {
+        this.st_class = st_class;
+    }
+
+    public double getAvg() {
         return avg;
     }
 
     public void setAvg(int avg) {
         this.avg = avg;
+    }
+
+    public int getId() {return id;}
+
+    public void setId(int id){this.id = id;}
+
+    @NonNull
+    @Override
+    public String toString() {
+        return("ID: " + id + "\n Name: " + name + "\n Surname: " + surname + "\n Class: " + st_class + "\n Average: " + avg + "\n");
     }
 }
