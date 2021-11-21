@@ -3,13 +3,13 @@ package com.example.sqlitefinaltask;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Utils {
-    final static String TABLE_STUDENT_NAME = "tbl_student";
+    final static String DATABASE_NAME = "db";
 
+    final static String TABLE_STUDENT_NAME = "tbl_student";
     final static String TABLE_STUDENT_COL_ID = "student_id";
     final static String TABLE_STUDENT_COL_NAME = "student_name";
     final static String TABLE_STUDENT_COL_SURNAME = "student_surname";
@@ -29,7 +29,7 @@ public class Utils {
 
     public static void createAllTables(SQLiteDatabase db){
         db.execSQL("create table if not exists" +
-                " tbl_student(student_id integer primary key autoincrement, student_name text, student_surname text, student_class_id integer, student_average integer)");
+                " tbl_student(student_id INTEGR PRIMARY KEY AUTOINCREMENT, student_name text, student_surname text, student_class_id integer, student_average integer)");
 
         db.execSQL("create table if not exists" +
                 " tbl_class(class_id integer primary key autoincrement, class_name integer, class_teacher text)");
@@ -38,16 +38,22 @@ public class Utils {
                 " tbl_teacher(teacher_id integer primary key autoincrement, teacher_name text, teacher_surname text, teacher_profession text)");
     }
 
-    public static void addStudent(Student student, SQLiteDatabase db){
-        String name = student.getName();
-        String surname = student.getSurname();
-        int classId = student.getClassId();
-        int avg = student.getAvg();
+    public static void addStudent(Student s, SQLiteDatabase db){
+        System.out.println(s.getId());
+        System.out.println(s.getName());
+        System.out.println(s.getSurname());
+        System.out.println(s.getClassId());
+        System.out.println(s.getAvg());
 
-        db.execSQL("insert into tbl_student values(null, name, surname, classId, avg)");
+        if(s.getId() == 0){
+            db.execSQL("insert into tbl_student values(null, '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
+        }
+        else {
+            db.execSQL("insert into tbl_student values("+s.getId()+", '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
+        }
     }
 
-    public static ArrayList<Student> getStudents(String studentName, SQLiteDatabase db){
+    public static ArrayList<Student> getStudentsByName(String studentName, SQLiteDatabase db){
         ArrayList<Student> students = new ArrayList<>();
         Cursor cursor = db.rawQuery("select * from tbl_student", null);
         while(cursor.moveToNext()){
@@ -65,6 +71,21 @@ public class Utils {
         }
         return students;
     }
+    public static ArrayList<Student> getStudentsByClass(int classId, SQLiteDatabase db){
+        ArrayList<Student> students = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from tbl_student where student_class_id =" + classId, null);
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String surname = cursor.getString(2);
+            int avg = cursor.getInt(4);
+
+            Student student = new Student(id, name, surname, classId, avg);
+            students.add(student);
+        }
+        return students;
+    }
+
 
     public static ArrayList<Student> getStudentsWithHigherAvg(int studentAvg, SQLiteDatabase db){
         ArrayList<Student> students = new ArrayList<>();
@@ -104,6 +125,19 @@ public class Utils {
         db.execSQL("update tbl_student set student_average ='" +avg+ "' where student_id=" + id);
     }
 
+    public static void addDefaultStudents(SQLiteDatabase db){
+        Student s1 = new Student("Murad", "Rahimli", 851, 100);
+        Student s2 = new Student("Rafi", "Albagli Zagha", 815, 100);
+        Student s3 = new Student("Itai", "Maman", 824, 100);
 
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(s1);
+        students.add(s2);
+        students.add(s3);
 
+        System.out.println("class is "+s1.getClassId());
+        for(Student s : students){
+            db.execSQL("insert into tbl_student values(null, '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
+        }
+    }
 }

@@ -8,8 +8,10 @@ public class Student {
     private int avg;
 
     public Student(String name, String surname, int classId,  int avg) {
+        this.id = 0;
         this.name = name;
         this.surname = surname;
+        this.classId = classId;
         this.avg = avg;
     }
 
@@ -17,6 +19,7 @@ public class Student {
         this.id = id;
         this.name = name;
         this.surname = surname;
+        this.classId = classId;
         this.avg = avg;
     }
 
@@ -52,7 +55,7 @@ public class Student {
     }
 
     public int getId() {
-        return avg;
+        return id;
     }
 
     public void setId(int id) {

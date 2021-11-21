@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
+            android:name=".Details_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".AddStudents_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".AllStudents_Screen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
