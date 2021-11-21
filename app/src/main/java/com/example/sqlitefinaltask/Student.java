@@ -4,14 +4,16 @@ public class Student {
     private int id;
     private String name;
     private String surname;
+    private int classId;
     private int avg;
 
-    public Student(String name, String surname, int avg) {
+    public Student(String name, String surname, int classId,  int avg) {
         this.name = name;
         this.surname = surname;
         this.avg = avg;
     }
-    public Student(int id, String name, String surname, int avg) {
+
+    public Student(int id, String name, String surname, int classId, int avg) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -34,6 +36,13 @@ public class Student {
         this.surname = surname;
     }
 
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
     public int getAvg() {
         return avg;
     }
