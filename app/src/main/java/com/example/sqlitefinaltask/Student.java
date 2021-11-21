@@ -3,11 +3,11 @@ package com.example.sqlitefinaltask;
 import androidx.annotation.NonNull;
 
 public class Student {
-    String name;
-    String surname;
-    String st_class;
-    double avg;
-    int id;
+    private String name;
+    private String surname;
+    private String st_class;
+    private double avg;
+    private int id;
 
     public Student(int id, String name, String surname, String st_class, double avg) {
         this.id = id;

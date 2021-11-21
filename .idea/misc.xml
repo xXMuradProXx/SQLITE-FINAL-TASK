@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/rafae/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/rafae/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_table.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/rafae/SQLITE-FINAL-TASK/app/src/main/res/layout/row_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/rafae/SQLITE-FINAL-TASK/app/src/main/res/menu/splash_menu.xml" value="0.20416666666666666" />
       </map>
     </option>

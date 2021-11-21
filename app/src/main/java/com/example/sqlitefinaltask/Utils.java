@@ -1,8 +1,11 @@
 package com.example.sqlitefinaltask;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import androidx.annotation.CallSuper;
 
 import java.util.ArrayList;
 
@@ -112,10 +115,32 @@ public class Utils {
     }
 
     public static void updateStudent(Student s, SQLiteDatabase db){
+        int id = s.getId();
 
+        ContentValues cv = new ContentValues();
+        cv.put(TABLE_STUDENT_COL_NAME, s.getName());
+        cv.put(TABLE_STUDENT_COL_SURNAME, s.getSurname());
+        cv.put(TABLE_STUDENT_COL_Class, s.getSt_class());
+        cv.put(TABLE_STUDENT_COL_AVERAGE, s.getAvg());
+
+        db.update(TABLE_NAME_STUDENT, cv, TABLE_STUDENT_COL_ID + " = " + id, null);
     }
+    @SuppressLint({"range", "recycle"})
+    public static ArrayList<Student> getStudents(SQLiteDatabase db){
 
+       Cursor cursor = db.rawQuery("select * from " + TABLE_NAME_STUDENT, null);
+        ArrayList<Student> students = new ArrayList<>();
 
+        while(cursor.moveToNext()){
+            students.add(new Student(cursor.getInt(cursor.getColumnIndex(TABLE_STUDENT_COL_ID)),
+                    cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_NAME)),
+                    cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_SURNAME)),
+                    cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_Class)),
+                    cursor.getDouble(cursor.getColumnIndex(TABLE_STUDENT_COL_AVERAGE))));
+
+        }
+        return students;
+    }
 
 
 

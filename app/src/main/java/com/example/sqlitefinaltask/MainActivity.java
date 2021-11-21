@@ -2,8 +2,10 @@ package com.example.sqlitefinaltask;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
@@ -17,18 +19,16 @@ public class MainActivity extends AppCompatActivity {
 
         btn = findViewById(R.id.btn_start);
         db = openOrCreateDatabase(Utils.DB_name, MODE_PRIVATE, null);
-
-        Student s = new Student("rafael", "zagha", " i1" ,  45.7);
-        Student t = new Student("murad", "ragimli", " i2" ,  30.5);
-        Student p = new Student("roni", "ruben", " i9" ,  74.9);
-
         Utils.createTables(db);
-        Utils.resetTables(db);
 
-        Utils.addStudent(s, db);
-        Utils.addStudent(t, db);
-        Utils.addStudent(p, db);
+        Student i = new Student("Itai", "Maman", "yb8", 70);
+        Utils.addStudent(i, db);
 
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TableActivity.class));
+            }
+        });
     }
-
 }
