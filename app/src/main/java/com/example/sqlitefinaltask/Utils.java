@@ -69,6 +69,7 @@ public class Utils {
     public static ArrayList<Student> getStudentsWithHigherAvg(int studentAvg, SQLiteDatabase db){
         ArrayList<Student> students = new ArrayList<>();
         Cursor cursor = db.rawQuery("select * from tbl_student", null);
+        //Cursor cursor = db.rawQuery("select * from tbl_student where student_average >" + studentAvg, null);
         while(cursor.moveToNext()){
             int avg = cursor.getInt(4);
 
