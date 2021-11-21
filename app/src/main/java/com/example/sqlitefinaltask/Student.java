@@ -1,11 +1,18 @@
 package com.example.sqlitefinaltask;
 
 public class Student {
-    String name;
-    String surname;
-    int avg;
+    private int id;
+    private String name;
+    private String surname;
+    private int avg;
 
     public Student(String name, String surname, int avg) {
+        this.name = name;
+        this.surname = surname;
+        this.avg = avg;
+    }
+    public Student(int id, String name, String surname, int avg) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.avg = avg;
@@ -33,5 +40,13 @@ public class Student {
 
     public void setAvg(int avg) {
         this.avg = avg;
+    }
+
+    public int getId() {
+        return avg;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
