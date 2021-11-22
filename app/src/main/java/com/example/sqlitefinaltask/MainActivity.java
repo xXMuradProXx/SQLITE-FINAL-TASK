@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
+        Utils.deleteAllTables(db);
         Utils.createAllTables(db);
         Utils.addDefaultStudents(db);
     }

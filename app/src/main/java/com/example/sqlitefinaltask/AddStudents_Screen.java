@@ -1,7 +1,5 @@
 package com.example.sqlitefinaltask;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,11 +20,18 @@ public class AddStudents_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_students_screen);
 
+        db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
+
         et_name = findViewById(R.id.et_name);
         et_surname = findViewById(R.id.et_surname);
         et_class = findViewById(R.id.et_class);
         et_average = findViewById(R.id.et_average);
         btn_submit = findViewById(R.id.btn_submit);
+
+        //et_name.setText("Student");
+        //et_surname.setText("Test");
+        //et_class.setText("1000");
+        //et_average.setText("0");
 
         btn_submit.setOnClickListener(view -> {
             try {
@@ -38,10 +43,11 @@ public class AddStudents_Screen extends AppCompatActivity {
                 student = new Student(name, surname, classId, avg);
 
                 Utils.addStudent(student, db);
+                Toast.makeText(getApplicationContext(), "Student " + name + " successfully added", Toast.LENGTH_LONG).show();
             }
             catch(NumberFormatException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Please enter number fot class and average", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please enter \n text for Name and Surname \n number for Class and Average", Toast.LENGTH_LONG).show();
             }
         });
     }

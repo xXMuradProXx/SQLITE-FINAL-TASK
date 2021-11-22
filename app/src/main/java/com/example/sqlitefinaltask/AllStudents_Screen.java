@@ -44,7 +44,7 @@ public class AllStudents_Screen extends AppCompatActivity {
             System.out.println(classId);
             System.out.println(avg);
 
-            Student student = new Student(id, name, surname, classId, avg);
+            Student student = new Student(name, surname, classId, avg);
             students.add(student);
         }
 

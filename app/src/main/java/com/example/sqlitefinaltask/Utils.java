@@ -29,13 +29,20 @@ public class Utils {
 
     public static void createAllTables(SQLiteDatabase db){
         db.execSQL("create table if not exists" +
-                " tbl_student(student_id INTEGR PRIMARY KEY AUTOINCREMENT, student_name text, student_surname text, student_class_id integer, student_average integer)");
+                " tbl_student(student_id INTEGER PRIMARY KEY AUTOINCREMENT, student_name text, student_surname text, student_class_id integer, student_average integer)");
 
         db.execSQL("create table if not exists" +
                 " tbl_class(class_id integer primary key autoincrement, class_name integer, class_teacher text)");
 
         db.execSQL("create table if not exists" +
                 " tbl_teacher(teacher_id integer primary key autoincrement, teacher_name text, teacher_surname text, teacher_profession text)");
+    }
+    public static void deleteAllTables(SQLiteDatabase db){
+        db.execSQL("drop table if exists tbl_student");
+
+        db.execSQL("drop table if exists tbl_class");
+
+        db.execSQL("drop table if exists tbl_teacher");
     }
 
     public static void addStudent(Student s, SQLiteDatabase db){
@@ -46,10 +53,17 @@ public class Utils {
         System.out.println(s.getAvg());
 
         if(s.getId() == 0){
-            db.execSQL("insert into tbl_student values(null, '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
+            ContentValues cv = new ContentValues();
+            cv.put(Utils.TABLE_STUDENT_COL_NAME, s.getName());
+            cv.put(Utils.TABLE_STUDENT_COL_SURNAME, s.getSurname());
+            cv.put(Utils.TABLE_STUDENT_COL_CLASS_ID, s.getClassId());
+            cv.put(Utils.TABLE_STUDENT_COL_AVERAGE, s.getAvg());
+
+            db.insert("tbl_student", "student_id", cv);
+            //db.execSQL("insert into "+Utils.TABLE_STUDENT_NAME+" values(null, '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
         }
         else {
-            db.execSQL("insert into tbl_student values("+s.getId()+", '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
+            db.execSQL("insert into "+Utils.TABLE_STUDENT_NAME+" values("+s.getId()+", '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
         }
     }
 
@@ -135,7 +149,6 @@ public class Utils {
         students.add(s2);
         students.add(s3);
 
-        System.out.println("class is "+s1.getClassId());
         for(Student s : students){
             db.execSQL("insert into tbl_student values(null, '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassId()+", "+s.getAvg()+")");
         }
