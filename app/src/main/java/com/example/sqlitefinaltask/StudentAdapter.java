@@ -45,7 +45,7 @@ public class StudentAdapter extends BaseAdapter {
 
         tv_name.setText(tmp.getName());
         tv_surname.setText(tmp.getSurname());
-        tv_class.setText(""+tmp.getClassId());
+        tv_class.setText(tmp.getClassName());
         tv_average.setText(""+tmp.getAvg());
 
         return convertview;

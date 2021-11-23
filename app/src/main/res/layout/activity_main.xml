@@ -4,4 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/et_class"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+
+        android:hint="Enter Class"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_get_students_by_class"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Students By Class"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/et_class"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="@+id/et_class"
+        app:layout_constraintTop_toBottomOf="@+id/et_class"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <EditText
+        android:id="@+id/et_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="116dp"
+        android:hint="Enter Average Mark"
+        app:layout_constraintEnd_toEndOf="@+id/et_class"
+        app:layout_constraintHorizontal_bias="0.437"
+        app:layout_constraintStart_toStartOf="@+id/et_class"
+        app:layout_constraintTop_toBottomOf="@+id/et_class" />
+
+    <Button
+        android:id="@+id/btn_get_students_by_higher_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Get Students With Higher Average Mark"
+        app:layout_constraintStart_toStartOf="@+id/et_average"
+        app:layout_constraintEnd_toEndOf="@+id/et_average"
+        app:layout_constraintTop_toBottomOf="@+id/et_average" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
             android:name=".AddStudents_Screen"
             android:exported="false" />
         <activity
-            android:name=".AllStudents_Screen"
+            android:name=".Get_Students_Screen"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
