@@ -10,5 +10,9 @@ public class Details_Screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_screen);
+
+        getSupportActionBar().hide();
+
+
     }
 }

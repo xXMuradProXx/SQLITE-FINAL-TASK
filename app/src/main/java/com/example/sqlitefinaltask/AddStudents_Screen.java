@@ -20,6 +20,8 @@ public class AddStudents_Screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_students_screen);
 
+        getSupportActionBar().hide();
+
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
         et_name = findViewById(R.id.et_name);
@@ -28,26 +30,21 @@ public class AddStudents_Screen extends AppCompatActivity {
         et_average = findViewById(R.id.et_average);
         btn_submit = findViewById(R.id.btn_submit);
 
-        //et_name.setText("Student");
-        //et_surname.setText("Test");
-        //et_class.setText("1000");
-        //et_average.setText("0");
-
         btn_submit.setOnClickListener(view -> {
             try {
                 String name = et_name.getText().toString();
                 String surname = et_surname.getText().toString();
-                int classId = Integer.parseInt(et_class.getText().toString());
+                String className = et_class.getText().toString();
                 int avg = Integer.parseInt(et_average.getText().toString());
 
-                student = new Student(name, surname, classId, avg);
+                student = new Student(name, surname, className, avg);
 
                 Utils.addStudent(student, db);
                 Toast.makeText(getApplicationContext(), "Student " + name + " successfully added", Toast.LENGTH_LONG).show();
             }
             catch(NumberFormatException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Please enter \n text for Name and Surname \n number for Class and Average", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Please enter \n text for Name, Surname and Class, \n number for Average", Toast.LENGTH_LONG).show();
             }
         });
     }
