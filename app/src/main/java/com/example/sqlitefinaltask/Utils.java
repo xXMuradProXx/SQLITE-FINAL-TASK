@@ -79,7 +79,7 @@ public class Utils {
             String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
             String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
             String st_class = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_Class));
-            double st_average = cursor.getDouble(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
+            int st_average = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
 
             Student tmp = new Student(id, st_name, st_surname, st_class, st_average);
             students.add(tmp);
@@ -100,7 +100,7 @@ public class Utils {
             String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
             String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
             String st_class = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_Class));
-            double st_average = cursor.getDouble(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
+            int st_average = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
 
             Student tmp = new Student(id, st_name, st_surname, st_class, st_average);
             students.add(tmp);
@@ -125,6 +125,7 @@ public class Utils {
 
         db.update(TABLE_NAME_STUDENT, cv, TABLE_STUDENT_COL_ID + " = " + id, null);
     }
+
     @SuppressLint({"range", "recycle"})
     public static ArrayList<Student> getStudents(SQLiteDatabase db){
 
@@ -136,10 +137,26 @@ public class Utils {
                     cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_NAME)),
                     cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_SURNAME)),
                     cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_Class)),
-                    cursor.getDouble(cursor.getColumnIndex(TABLE_STUDENT_COL_AVERAGE))));
+                    cursor.getInt(cursor.getColumnIndex(TABLE_STUDENT_COL_AVERAGE))));
 
         }
         return students;
+    }
+    @SuppressLint("Range")
+    public static Student getStudent(int id, SQLiteDatabase db){
+        String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + Utils.TABLE_STUDENT_COL_ID + " = " + id;
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+         String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
+        String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
+        String st_class = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_Class));
+        int st_average = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
+
+        Student tmp = new Student(id, st_name, st_surname, st_class, st_average);
+
+        return tmp;
+
     }
 
 

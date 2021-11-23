@@ -6,10 +6,10 @@ public class Student {
     private String name;
     private String surname;
     private String st_class;
-    private double avg;
+    private int avg;
     private int id;
 
-    public Student(int id, String name, String surname, String st_class, double avg) {
+    public Student(int id, String name, String surname, String st_class, int avg) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -17,7 +17,7 @@ public class Student {
         this.avg = avg;
     }
 
-    public Student(String name, String surname, String st_class, double avg) {
+    public Student(String name, String surname, String st_class, int avg) {
         this.name = name;
         this.surname = surname;
         this.st_class = st_class;
@@ -49,7 +49,7 @@ public class Student {
         this.st_class = st_class;
     }
 
-    public double getAvg() {
+    public int getAvg() {
         return avg;
     }
 

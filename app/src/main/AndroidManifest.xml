@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
+            android:name=".EditScreen"
+            android:exported="false" />
+        <activity
             android:name=".TableActivity"
             android:exported="false" />
         <activity

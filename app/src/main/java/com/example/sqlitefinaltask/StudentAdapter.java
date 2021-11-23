@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -35,6 +36,16 @@ public class StudentAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Student tmp = students.get(position);
-        convertView = LayoutInflater.from(context).inflate(R.layout.)
+        convertView = LayoutInflater.from(context).inflate(R.layout.row_item, null);
+
+        TextView name = convertView.findViewById(R.id.tv_name);
+        TextView st_class = convertView.findViewById(R.id.tv_class);
+        TextView avg = convertView.findViewById(R.id.tv_avg);
+
+        name.setText("Name: " + tmp.getName() + " " + tmp.getSurname());
+        st_class.setText("Class: " + tmp.getSt_class());
+        avg.setText("Average: " + tmp.getAvg());
+
+        return convertView;
     }
 }
