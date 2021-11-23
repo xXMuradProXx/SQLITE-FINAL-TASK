@@ -195,6 +195,56 @@ public class Utils {
         }
     }
 
+    /*public static void sort(SQLiteDatabase db) {
+        ArrayList<Student> students = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery("select * from tbl_student", null);
+        while(cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String surname = cursor.getString(2);
+            String className = cursor.getString(3);
+            int avg = cursor.getInt(4);
+
+            Student student = new Student(name, surname, className, avg);
+            students.add(student);
+        }
+        int i=0;
+        Class c = null;
+        Teacher t = null;
+        String subject = t.getSubject();
+
+        for(int i=0; i< students.size(); i++){
+            for(int j=0; j < students.size(); j++){
+                
+            }
+        }
+    }*/
+
+    public static ArrayList<Teacher> sortTeachersBySubject(SQLiteDatabase db){
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from tbl_teacher", null);
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String surname = cursor.getString(2);
+            String subject = cursor.getString(3);
+
+            Teacher teacher = new Teacher(id, name, surname, subject);
+            teachers.add(teacher);
+        }
+        ArrayList<Teacher> sort = new ArrayList<>();
+        for(int i=0; i < teachers.size()-1; i++){
+            for(int j=i+1; j < teachers.size(); j++){
+                sort.add(teachers.get(i));
+                if(teachers.get(i).getSubject().equals(teachers.get(j).getSubject())){
+                    sort.add(teachers.get(j));
+                }
+            }
+        }
+        return sort;
+    }
+
     public static void addDefaultStudents(SQLiteDatabase db){
         Student s1 = new Student("Murad", "Rahimli", "851", 100);
         Student s2 = new Student("Rafi", "Albagli Zagha", "815", 100);
@@ -215,6 +265,29 @@ public class Utils {
 
         for(Student s : students){
             db.execSQL("insert into tbl_student values(null, '"+s.getName()+"', '"+s.getSurname()+"', "+s.getClassName()+", "+s.getAvg()+")");
+        }
+    }
+
+    public static void addDefaultTeachers(SQLiteDatabase db){
+        Teacher t1 = new Teacher("fdfds", "sdfdfds", "chemistry");
+        Teacher t2 = new Teacher("Albagli Zagha", "815", "biology");
+        Teacher t3 = new Teacher("Maman", "824", "physics");
+        Teacher t4 = new Teacher("Esha", "587", "biology");
+        Teacher t5 = new Teacher("One no", "14", "math");
+        Teacher t6 = new Teacher("Enoemos", "463", "physics");
+        Teacher t7 = new Teacher("Who Doctor", "1000", "physics");
+
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        teachers.add(t1);
+        teachers.add(t2);
+        teachers.add(t3);
+        teachers.add(t4);
+        teachers.add(t5);
+        teachers.add(t6);
+        teachers.add(t7);
+
+        for(Teacher t : teachers){
+            db.execSQL("insert into tbl_teacher values(null, '"+t.getName()+"', '"+t.getSurname()+"', '"+t.getSubject()+"')");
         }
     }
 }

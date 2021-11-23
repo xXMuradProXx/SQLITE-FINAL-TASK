@@ -50,4 +50,14 @@
         app:layout_constraintStart_toStartOf="@+id/et_average"
         app:layout_constraintEnd_toEndOf="@+id/et_average"
         app:layout_constraintTop_toBottomOf="@+id/et_average" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="Go to Teachers' list"
+        app:layout_constraintEnd_toEndOf="@+id/btn_get_students_by_higher_average"
+        app:layout_constraintStart_toStartOf="@+id/btn_get_students_by_higher_average"
+        app:layout_constraintTop_toBottomOf="@+id/btn_get_students_by_higher_average" />
 </androidx.constraintlayout.widget.ConstraintLayout>

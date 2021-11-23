@@ -19,12 +19,18 @@ public class MainActivity extends AppCompatActivity {
     EditText et_average;
     Button btn_get_students_with_by_higher_average;
 
+    Button button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
+
+        Utils.deleteAllTables(db);
+        Utils.createAllTables(db);
+        Utils.addDefaultStudents(db);
 
         et_class = findViewById(R.id.et_class);
 
@@ -48,10 +54,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Utils.deleteAllTables(db);
-        Utils.createAllTables(db);
-        Utils.addDefaultStudents(db);
-
+        button = findViewById(R.id.button);
+        button.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Teacher_Screen.class)));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
