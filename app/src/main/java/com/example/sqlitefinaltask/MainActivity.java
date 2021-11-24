@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         btn = findViewById(R.id.btn_start);
         db = openOrCreateDatabase(Utils.DB_name, MODE_PRIVATE, null);
         Utils.createTables(db);
-        Utils.resetTables(db);
 
         Student i = new Student("Itai", "Maman", "yb8", 70);
         Utils.addStudent(i, db);

@@ -31,6 +31,10 @@ public class Utils {
     final static String TABLE_TEACHER_COL_SURNAME = "teacher_surname";
     final static String TABLE_TEACHER_COL_SUBJECT = "teacher_subject";
 
+    final static String FILTER_TEXT_KEY = "filter";
+    final static String FILTER_KEY = "filter_by";
+    final static String BY_CLASS_VALUE  = "by class";
+    final static String BY_GRADE_VALUE = "by grade";
 
     public static void createTables(SQLiteDatabase db){
 
@@ -53,6 +57,7 @@ public class Utils {
                 TABLE_TEACHER_COL_SUBJECT + " text " + ")");
 
     }
+
     public static void resetTables(SQLiteDatabase db){
         db.execSQL("drop table " + Utils.TABLE_NAME_STUDENT);
         db.execSQL("drop table " + Utils.TABLE_NAME_CLASS);
@@ -90,7 +95,7 @@ public class Utils {
     }
 
     @SuppressLint("range")
-    public static ArrayList<Student> getHigherAvg(double avg, SQLiteDatabase db){
+    public static ArrayList<Student> getHigherAvg(int avg, SQLiteDatabase db){
         String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + TABLE_STUDENT_COL_AVERAGE + " > " + avg;
         Cursor cursor = db.rawQuery(query, null);
 
@@ -142,6 +147,7 @@ public class Utils {
         }
         return students;
     }
+
     @SuppressLint("Range")
     public static Student getStudent(int id, SQLiteDatabase db){
         String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + Utils.TABLE_STUDENT_COL_ID + " = " + id;
@@ -159,6 +165,24 @@ public class Utils {
 
     }
 
+    @SuppressLint("Range")
+    public static ArrayList<Student> getClassStudents(String st_class, SQLiteDatabase db){
+        String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + TABLE_STUDENT_COL_Class + " = '" + st_class + "'";
+        Cursor cursor = db.rawQuery(query, null);
+
+        ArrayList<Student> students= new ArrayList<>();
+        while(cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_ID));
+            String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
+            String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
+            int st_average = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
+
+            Student tmp = new Student(id, st_name, st_surname, st_class, st_average);
+            students.add(tmp);
+        }
+
+        return students;
+    }
 
 
 
