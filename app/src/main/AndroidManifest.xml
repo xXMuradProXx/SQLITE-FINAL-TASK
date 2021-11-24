@@ -10,13 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
+            android:name=".Update_Student_Screen"
+            android:exported="false" />
+        <activity
+            android:name=".Delete_Student_Screen"
+            android:exported="false" />
+        <activity
             android:name=".Teacher_Screen"
             android:exported="false" />
         <activity
             android:name=".Details_Screen"
             android:exported="false" />
         <activity
-            android:name=".AddStudents_Screen"
+            android:name=".AddStudent_Screen"
             android:exported="false" />
         <activity
             android:name=".Get_Students_Screen"

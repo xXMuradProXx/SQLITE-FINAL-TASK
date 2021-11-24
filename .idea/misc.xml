@@ -4,17 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_add_students_screen.xml" value="0.2" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_all_students_screen.xml" value="0.14074074074074075" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_all_students_screen.xml" value="0.33" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_delete_student_screen.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_details_screen.xml" value="0.1675213675213675" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_teacher_screen.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_update_student_screen.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/content_all_students_screen.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/content_teacher_screen.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/fragment_first.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_student.xml" value="0.33" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_teacher.xml" value="0.25" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/menu/menu.xml" value="0.1" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/menu/menu.xml" value="0.25" />
       </map>
     </option>
   </component>

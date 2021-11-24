@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/add_student"
+        android:title="Add Student"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/delete_student"
+        android:title="Delete Student"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/update_student"
+        android:title="Update Student"
+        android:orderInCategory="300"
+        app:showAsAction="ifRoom"
+        />
     <item
         android:id="@+id/all_students"
         android:title="All Students"
-        android:orderInCategory="100"
+        android:orderInCategory="400"
         app:showAsAction="never"
     />
     <item
-        android:id="@+id/add_students"
-        android:title="Add Students"
-        android:orderInCategory="200"
-        app:showAsAction="never"
-        />
-    <item
         android:id="@+id/details"
         android:title="details"
-        android:orderInCategory="300"
+        android:orderInCategory="500"
         app:showAsAction="never"
         />
+
+
 </menu>
