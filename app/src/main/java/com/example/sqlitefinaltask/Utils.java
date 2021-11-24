@@ -3,6 +3,7 @@ package com.example.sqlitefinaltask;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -98,17 +99,20 @@ public class Utils {
         }
         return students;
     }
-    public static ArrayList<Student> getStudentsByClass(String className, SQLiteDatabase db){
+    public static ArrayList<Student> getStudentsByClass(String studentClassName, SQLiteDatabase db){
         ArrayList<Student> students = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from tbl_student where student_class_name =" + className, null);
+        Cursor cursor = db.rawQuery("select * from tbl_student", null);
         while(cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            String surname = cursor.getString(2);
-            int avg = cursor.getInt(4);
+            String className = cursor.getString(3);
+            if(className.equals(studentClassName)){
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String surname = cursor.getString(2);
+                int avg = cursor.getInt(4);
 
-            Student student = new Student(id, name, surname, className, avg);
-            students.add(student);
+                Student student = new Student(id, name, surname, className, avg);
+                students.add(student);
+            }
         }
         return students;
     }
@@ -135,8 +139,8 @@ public class Utils {
     }
 
     public static void deleteStudent(int studentId, SQLiteDatabase db){
-        //db.execSQL("delete from tbl_student where student_id =" +studentId);
-        db.delete("tbl_student", "student_id =" + studentId, null);
+        db.execSQL("delete from tbl_student where student_id =" +studentId);
+        //db.delete("tbl_student", "student_id =" + studentId, null);
     }
 
     public static void updateStudent(Student student, SQLiteDatabase db){
@@ -147,9 +151,9 @@ public class Utils {
         int avg = student.getAvg();
 
         db.execSQL("update tbl_student set student_name ='" +name+ "' where student_id=" + id);
-        db.execSQL("update tbl_student set student_username ='" +surname+ "' where student_id=" + id);
-        db.execSQL("update tbl_student set student_class_id ='" +className+ "' where student_id=" + id);
-        db.execSQL("update tbl_student set student_average ='" +avg+ "' where student_id=" + id);
+        db.execSQL("update tbl_student set student_surname ='" +surname+ "' where student_id=" + id);
+        db.execSQL("update tbl_student set student_class_name ='" +className+ "' where student_id=" + id);
+        db.execSQL("update tbl_student set student_average =" +avg+ " where student_id=" + id);
     }
 
     public static void sortStudentsBySubject(SQLiteDatabase db){
@@ -234,11 +238,20 @@ public class Utils {
             teachers.add(teacher);
         }
         ArrayList<Teacher> sort = new ArrayList<>();
+        ArrayList<Integer> count = new ArrayList<>();
+        boolean b = true;
         for(int i=0; i < teachers.size()-1; i++){
-            for(int j=i+1; j < teachers.size(); j++){
+            for(int k=0; k < teachers.size(); k++){
+                if(!sort.isEmpty() && teachers.get(i).getSubject().equals(sort.get(k).getSubject())){
+                    b = false;
+                }
+            }
+            if(!b) {
                 sort.add(teachers.get(i));
-                if(teachers.get(i).getSubject().equals(teachers.get(j).getSubject())){
-                    sort.add(teachers.get(j));
+                for(int j=i+1; j < teachers.size(); j++){
+                    if(teachers.get(i).getSubject().equals(teachers.get(j).getSubject())){
+                        sort.add(teachers.get(j));
+                    }
                 }
             }
         }

@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddStudents_Screen extends AppCompatActivity {
+public class AddStudent_Screen extends AppCompatActivity {
     EditText et_name;
     EditText et_surname;
     EditText et_class;
