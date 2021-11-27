@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,7 +19,9 @@ public class Get_Students_Screen extends AppCompatActivity {
     TextView tv_students_list;
     ListView lv_all_students;
     Switch switch_by_subject;
+    Button button;
 
+    Intent intent;
     SQLiteDatabase db;
     ArrayList<Student> students;
     StudentAdapter studentAdapter;
@@ -31,7 +35,7 @@ public class Get_Students_Screen extends AppCompatActivity {
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
-        Intent intent = getIntent();
+        intent = getIntent();
         String table = intent.getStringExtra(Utils.INTENT_KEY_GET_STUDENTS);
 
         tv_students_list = findViewById(R.id.tv_students_list);
@@ -76,8 +80,19 @@ public class Get_Students_Screen extends AppCompatActivity {
         lv_all_students.setOnItemClickListener((adapterView, view, i, l) -> {});
 
         switch_by_subject = findViewById(R.id.switch_by_subject);
-        switch_by_subject.setOnCheckedChangeListener((compoundButton, b) -> {
+        switch_by_subject.setOnCheckedChangeListener((compoundButton, b) -> {});
 
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Get_Students_Screen.this, Details_Screen.class));
+            }
         });
+
     }
+    
+    /*protected void onResume() {
+        super.onResume();
+    }*/
 }

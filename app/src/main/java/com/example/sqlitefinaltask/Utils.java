@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Utils {
     final static String DATABASE_NAME = "db";
@@ -225,9 +226,8 @@ public class Utils {
         }
     }*/
 
-    public static ArrayList<Teacher> sortTeachersBySubject(SQLiteDatabase db){
-        ArrayList<Teacher> teachers = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from tbl_teacher", null);
+    public static ArrayList<Teacher> sortTeachersBySubject(ArrayList<Teacher> teachers, SQLiteDatabase db){
+        /*Cursor cursor = db.rawQuery("select * from tbl_teacher", null);
         while(cursor.moveToNext()){
             int id = cursor.getInt(0);
             String name = cursor.getString(1);
@@ -237,8 +237,8 @@ public class Utils {
             Teacher teacher = new Teacher(id, name, surname, subject);
             teachers.add(teacher);
         }
-        ArrayList<Teacher> sort = new ArrayList<>();
-        ArrayList<Integer> count = new ArrayList<>();
+        ArrayList<Teacher> sort = new ArrayList<>();*/
+        /* ArrayList<Integer> count = new ArrayList<>();
         boolean b = true;
         for(int i=0; i < teachers.size()-1; i++){
             for(int k=0; k < teachers.size(); k++){
@@ -254,8 +254,40 @@ public class Utils {
                     }
                 }
             }
+        }*/
+        ArrayList<Teacher> sort = new ArrayList<>();
+        ArrayList<String> subjects = new ArrayList<>();
+        ArrayList<String> newSubjects = new ArrayList<>();
+
+        for(int i=0; i< teachers.size(); i++){
+            subjects.add(teachers.get(i).getSubject());
+            System.out.println("subject = " + subjects.get(i));
         }
-        return sort;
+
+        for(int i=0; i< subjects.size(); i++){
+            for(int j=i+1; j< subjects.size(); j++){
+                if(!subjects.get(i).equals(subjects.get(j))) {
+                    newSubjects.add(subjects.get(i));
+                }
+            }
+        }
+
+        for(String s : subjects){
+            System.out.println("new subject = " + s);
+        }
+
+        for(int i=0; i< subjects.size(); i++){
+            for(int j=0; j< teachers.size(); j++){
+                if(subjects.get(i).equals(teachers.get(j).getSubject())){
+                    sort.add(teachers.get(j));
+                }
+            }
+        }
+        for(String s : subjects){
+            System.out.println("new subject = " + s);
+        }
+        System.out.println("sorted");
+        return teachers;
     }
 
     public static void addDefaultStudents(SQLiteDatabase db){

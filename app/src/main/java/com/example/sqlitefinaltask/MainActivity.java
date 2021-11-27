@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_get_students_by_class = findViewById(R.id.btn_get_students_by_class);
         btn_get_students_by_class.setOnClickListener(view -> {
-            String className = et_class.getText().toString();
+            String className = et_class.getText().toString().trim();
             Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
             intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS);
             intent.putExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME, className);
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_get_students_by_higher_average = findViewById(R.id.btn_get_students_by_higher_average);
         btn_get_students_by_higher_average.setOnClickListener(view -> {
-            int avg = Integer.parseInt(et_average.getText().toString());
+            int avg = Integer.parseInt(et_average.getText().toString().trim());
             Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
             intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE);
             intent.putExtra(Utils.INTENT_KEY_STUDENT_AVERAGE ,avg);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_get_students_by_name = findViewById(R.id.btn_get_students_by_name);
         btn_get_students_by_name.setOnClickListener(view -> {
-            String name = et_name.getText().toString();
+            String name = et_name.getText().toString().trim();
             Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
             intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_NAME);
             intent.putExtra(Utils.INTENT_KEY_STUDENT_NAME, name);
