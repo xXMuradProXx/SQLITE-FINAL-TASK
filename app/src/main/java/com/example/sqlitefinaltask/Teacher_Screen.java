@@ -44,7 +44,6 @@ public class Teacher_Screen extends AppCompatActivity {
             Teacher teacher = new Teacher(id, name, surname, subject);
             teachers.add(teacher);
         }
-        teachers = Utils.sortTeachersBySubject(teachers, db);
         teacherAdapter = new TeacherAdapter(teachers, Teacher_Screen.this);
         lv_teachers.setAdapter(teacherAdapter);
         lv_teachers.setOnItemClickListener((adapterView, view, i, l) -> {});

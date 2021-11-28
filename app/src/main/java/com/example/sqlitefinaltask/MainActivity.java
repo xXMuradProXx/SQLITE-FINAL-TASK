@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         Utils.deleteAllTables(db);
         Utils.createAllTables(db);
         Utils.addDefaultStudents(db);
+        Utils.addDefaultClasses(db);
+        Utils.addDefaultTeachers(db);
+        //Utils.sortStudentsBySubject(db);
+        Utils.sortStudentsBySubjectv2(db);
 
         et_class = findViewById(R.id.et_class);
 

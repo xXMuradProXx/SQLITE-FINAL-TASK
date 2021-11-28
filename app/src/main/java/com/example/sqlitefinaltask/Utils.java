@@ -3,13 +3,12 @@ package com.example.sqlitefinaltask;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Utils {
-    final static String DATABASE_NAME = "db";
+    final static String DATABASE_NAME = "db3";
 
     final static String TABLE_STUDENT_NAME = "tbl_student";
     final static String TABLE_STUDENT_COL_ID = "student_id";
@@ -35,11 +34,22 @@ public class Utils {
     final static String TABLE_TEACHER_COL_SURNAME = "teacher_surname";
     final static String TABLE_TEACHER_COL_SUBJECT = "teacher_subject";
 
+    final static String TABLE_SUBJECT_NAME = "tbl_subject";
+    final static String TABLE_SUBJECT_COL_STUDENT_ID = "student_id";
+    final static String TABLE_SUBJECT_COL_STUDENT_NAME = "student_name";
+    final static String TABLE_SUBJECT_COL_STUDENT_SURNAME = "student_surname";
+    final static String TABLE_SUBJECT_COL_CLASS_NAME = "student_class_name";
+    final static String TABLE_SUBJECT_COL_AVERAGE = "student_average";
+    final static String TABLE_SUBJECT_COL_SUBJECT = "subject";
+
+
     final static String INTENT_KEY_GET_STUDENTS = "get_students";
 
     final static String INTENT_KEY_GET_STUDENTS_BY_NAME = "get_students_by_name";
     final static String INTENT_KEY_GET_STUDENTS_BY_CLASS = "get_students_by_class";
     final static String INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE = "get_students_by_higher_average";
+
+
 
 
     public static void createAllTables(SQLiteDatabase db){
@@ -51,6 +61,9 @@ public class Utils {
 
         db.execSQL("create table if not exists" +
                 " tbl_teacher(teacher_id integer primary key autoincrement, teacher_name text, teacher_surname text, teacher_subject text)");
+
+        db.execSQL("create table if not exists" +
+                " tbl_subject(student_id integer, student_name text, student_surname text, student_class_name text, student_average integer, subject text)");
     }
     public static void deleteAllTables(SQLiteDatabase db){
         db.execSQL("drop table if exists tbl_student");
@@ -58,6 +71,8 @@ public class Utils {
         db.execSQL("drop table if exists tbl_class");
 
         db.execSQL("drop table if exists tbl_teacher");
+
+        db.execSQL("drop table if exists tbl_subject");
     }
 
     public static void addStudent(Student s, SQLiteDatabase db){
@@ -158,146 +173,120 @@ public class Utils {
     }
 
     public static void sortStudentsBySubject(SQLiteDatabase db){
-        ArrayList<String> subjects = new ArrayList<>();
-        ArrayList<String> teachers = new ArrayList<>();
-        ArrayList<Class> classes = new ArrayList<>();
+        Cursor cursorStudent = db.rawQuery("select * from tbl_student", null);
 
+        while(cursorStudent.moveToNext()) {
 
-        Cursor cursorSubject = db.rawQuery("select teacher_subject from tbl_teacher", null);
-        while(cursorSubject.moveToNext()){
-            String subject = cursorSubject.getString(3);
-            subjects.add(subject);
-        }
+            int id = cursorStudent.getInt(0);
+            String name = cursorStudent.getString(1);
+            String surname = cursorStudent.getString(2);
+            String className = cursorStudent.getString(3);
+            int avg = cursorStudent.getInt(4);
 
-        for(int i=0; i < subjects.size(); i++){
-            for(int j=1; j < subjects.size(); j++){
-                if(subjects.get(i) == subjects.get(j))
-                    subjects.remove(j);
+            Log.d("check", "id: " + id +" class: " + className);
+
+            //Cursor cursorClass = db.rawQuery("select * from tbl_class where class_name =" + className, null);
+            //cursorClass.moveToNext();
+            //String teacher = cursorClass.getString(2);
+
+            Cursor cursorClass = db.rawQuery("select * from tbl_class", null);
+            String teacher = "";
+            //cursorClass.moveToFirst();
+            while(cursorClass.moveToNext()){
+                Log.d("check", "entered to first while");
+                if(cursorClass.getString(1).equals(className)){
+                    Log.d("check", "Same class_name found");
+                    teacher = cursorClass.getString(2);
+                    break;
+                }
             }
-        }
+            cursorClass.moveToFirst();
+            Log.d("check", "class: " + className + " teacher: " + teacher);
 
-        Cursor cursorClass = db.rawQuery("select * from tbl_class", null);
-        while(cursorClass.moveToNext()){
-            int id = cursorClass.getInt(0);
-            String name = cursorClass.getString(1);
-            String teacher = cursorClass.getString(2);
+            //Cursor cursorTeacher = db.rawQuery("select * from tbl_teacher where teacher_name =" + teacher, null);
+            //cursorTeacher.moveToNext();
+            //String subject = cursorTeacher.getString(3);
 
-            Class c = new Class(id, name, teacher);
-            classes.add(c);
-        }
-
-        Cursor cursorTeacher = db.rawQuery("select class_teacher from tbl_class", null);
-        while(cursorTeacher.moveToNext()){
-            String teacher = cursorTeacher.getString(2);
-            teachers.add(teacher);
-        }
-
-        for(int i=0; i < subjects.size(); i++){
-            for(int j=0; j < teachers.size(); j++){
-
+            Cursor cursorTeacher = db.rawQuery("select * from tbl_teacher", null);
+            String subject = "";
+            while(cursorTeacher.moveToNext()){
+                if(cursorTeacher.getString(1).equals(teacher)){
+                    subject = cursorTeacher.getString(3);
+                    break;
+                }
             }
 
+            Log.d("check", "teacher: " + teacher +"\n subject: " + subject);
+
+            db.execSQL("insert into tbl_subject values("+id+", '"+name+"', '"+surname+"', '"+className+"', "+avg+", '"+subject+"')");
+            Log.d("check", "--------------------------------------------------------------");
         }
     }
 
-    /*public static void sort(SQLiteDatabase db) {
-        ArrayList<Student> students = new ArrayList<>();
+    public static void sortStudentsBySubjectv2(SQLiteDatabase db){
+        Cursor cursorStudent = db.rawQuery("select * from tbl_student", null);
 
-        Cursor cursor = db.rawQuery("select * from tbl_student", null);
-        while(cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            String surname = cursor.getString(2);
-            String className = cursor.getString(3);
-            int avg = cursor.getInt(4);
+        while(cursorStudent.moveToNext()) {
 
-            Student student = new Student(name, surname, className, avg);
-            students.add(student);
+            int id = cursorStudent.getInt(0);
+            String name = cursorStudent.getString(1);
+            String surname = cursorStudent.getString(2);
+            String className = cursorStudent.getString(3);
+            int avg = cursorStudent.getInt(4);
+
+            Cursor cursorClass = db.rawQuery("select class_teacher from tbl_class where class_name = " + className, null);
+            cursorClass.moveToNext();
+            String teacher = cursorClass.getString(0);
+
+            Cursor cursorTeacher = db.rawQuery("select teacher_subject from tbl_teacher where teacher_name = '" + teacher +"'", null);
+            cursorTeacher.moveToNext();
+            String subject = cursorTeacher.getString(0);
+
+            cursorTeacher.moveToFirst();
+
+            db.execSQL("insert into tbl_subject values("+id+", '"+name+"', '"+surname+"', '"+className+"', "+avg+", '"+subject+"')");
         }
-        int i=0;
-        Class c = null;
-        Teacher t = null;
-        String subject = t.getSubject();
+    }
 
-        for(int i=0; i< students.size(); i++){
-            for(int j=0; j < students.size(); j++){
-                
-            }
-        }
-    }*/
+    public static void sortStudentsBySubjectv3(SQLiteDatabase db){
+        Cursor cursorStudent = db.rawQuery("select * from tbl_student", null);
 
-    public static ArrayList<Teacher> sortTeachersBySubject(ArrayList<Teacher> teachers, SQLiteDatabase db){
-        /*Cursor cursor = db.rawQuery("select * from tbl_teacher", null);
-        while(cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            String surname = cursor.getString(2);
-            String subject = cursor.getString(3);
+        while(cursorStudent.moveToNext()) {
 
-            Teacher teacher = new Teacher(id, name, surname, subject);
-            teachers.add(teacher);
-        }
-        ArrayList<Teacher> sort = new ArrayList<>();*/
-        /* ArrayList<Integer> count = new ArrayList<>();
-        boolean b = true;
-        for(int i=0; i < teachers.size()-1; i++){
-            for(int k=0; k < teachers.size(); k++){
-                if(!sort.isEmpty() && teachers.get(i).getSubject().equals(sort.get(k).getSubject())){
-                    b = false;
-                }
-            }
-            if(!b) {
-                sort.add(teachers.get(i));
-                for(int j=i+1; j < teachers.size(); j++){
-                    if(teachers.get(i).getSubject().equals(teachers.get(j).getSubject())){
-                        sort.add(teachers.get(j));
-                    }
-                }
-            }
-        }*/
-        ArrayList<Teacher> sort = new ArrayList<>();
-        ArrayList<String> subjects = new ArrayList<>();
-        ArrayList<String> newSubjects = new ArrayList<>();
+            int id = cursorStudent.getInt(0);
+            String name = cursorStudent.getString(1);
+            String surname = cursorStudent.getString(2);
+            String className = cursorStudent.getString(3);
+            int avg = cursorStudent.getInt(4);
 
-        for(int i=0; i< teachers.size(); i++){
-            subjects.add(teachers.get(i).getSubject());
-            System.out.println("subject = " + subjects.get(i));
-        }
+            Log.d("check", "id: " + id +" class: " + className);
 
-        for(int i=0; i< subjects.size(); i++){
-            for(int j=i+1; j< subjects.size(); j++){
-                if(!subjects.get(i).equals(subjects.get(j))) {
-                    newSubjects.add(subjects.get(i));
-                }
-            }
-        }
+            Cursor cursorClass = db.rawQuery("select * from tbl_class where class_name = " + className, null);
+            cursorClass.moveToNext();
+            String teacher = cursorClass.getString(2);
 
-        for(String s : subjects){
-            System.out.println("new subject = " + s);
-        }
+            Log.d("check", "class: " + className + " teacher: " + teacher);
 
-        for(int i=0; i< subjects.size(); i++){
-            for(int j=0; j< teachers.size(); j++){
-                if(subjects.get(i).equals(teachers.get(j).getSubject())){
-                    sort.add(teachers.get(j));
-                }
-            }
+            Cursor cursorTeacher = db.rawQuery("select teacher_subject from tbl_teacher where teacher_name = '" + teacher +"'", null);
+            cursorTeacher.moveToNext();
+            String subject = cursorTeacher.getString(3);
+
+            cursorTeacher.moveToFirst();
+            Log.d("check", "teacher: " + teacher + " subject: " + subject);
+
+            db.execSQL("insert into tbl_subject values("+id+", '"+name+"', '"+surname+"', '"+className+"', "+avg+", '"+subject+"')");
+            Log.d("check", "--------------------------------------------------------------");
         }
-        for(String s : subjects){
-            System.out.println("new subject = " + s);
-        }
-        System.out.println("sorted");
-        return teachers;
     }
 
     public static void addDefaultStudents(SQLiteDatabase db){
         Student s1 = new Student("Murad", "Rahimli", "851", 100);
-        Student s2 = new Student("Rafi", "Albagli Zagha", "815", 100);
-        Student s3 = new Student("Itai", "Maman", "824", 100);
-        Student s4 = new Student("Ashe", "Esha", "587", 14);
-        Student s5 = new Student("No one", "One no", "14", 0);
-        Student s6 = new Student("Someone", "Enoemos", "463", 58);
-        Student s7 = new Student("Doctor Who", "Who Doctor", "1000", 1000);
+        Student s2 = new Student("Itai", "Maman", "852", 100);
+        Student s3 = new Student("Ashe", "Esha", "844", 14);
+        Student s4 = new Student("Rafi", "Albagli Zagha", "815", 100);
+        Student s5 = new Student("Someone", "Enoemos", "120", 58);
+        Student s6 = new Student("No one", "One no", "844", 0);
+        Student s7 = new Student("Doctor Who", "Who Doctor", "121", 1000);
 
         ArrayList<Student> students = new ArrayList<>();
         students.add(s1);
@@ -313,14 +302,37 @@ public class Utils {
         }
     }
 
+    public static void addDefaultClasses(SQLiteDatabase db){
+        Class c1 = new Class("851", "Ronny");
+        Class c2 = new Class("120", "Noga");
+        Class c3 = new Class("121", "Irena");
+        Class c4 = new Class("122", "Inna");
+        Class c5 = new Class("815", "Nizan");
+        Class c6 = new Class("852", "Vachtang");
+        Class c7 = new Class("844", "Oleg");
+
+        ArrayList<Class> classes = new ArrayList<>();
+        classes.add(c1);
+        classes.add(c2);
+        classes.add(c3);
+        classes.add(c4);
+        classes.add(c5);
+        classes.add(c6);
+        classes.add(c7);
+
+        for(Class c : classes){
+            db.execSQL("insert into tbl_class values(null, '"+ c.getName()+"', '"+ c.getTeacher() +"')");
+        }
+    }
+
     public static void addDefaultTeachers(SQLiteDatabase db){
-        Teacher t1 = new Teacher("fdfds", "sdfdfds", "chemistry");
-        Teacher t2 = new Teacher("Albagli Zagha", "815", "biology");
-        Teacher t3 = new Teacher("Maman", "824", "physics");
-        Teacher t4 = new Teacher("Esha", "587", "biology");
-        Teacher t5 = new Teacher("One no", "14", "math");
-        Teacher t6 = new Teacher("Enoemos", "463", "physics");
-        Teacher t7 = new Teacher("Who Doctor", "1000", "physics");
+        Teacher t1 = new Teacher("Noga", "Chanani", "mathematics");
+        Teacher t2 = new Teacher("Nizan", "Karasenti", "computer science");
+        Teacher t3 = new Teacher("Vachtang", "Zinzandze", "physics");
+        Teacher t4 = new Teacher("Inna", "Mayorova", "mathematics");
+        Teacher t5 = new Teacher("Oleg", "Davidovich", "physics");
+        Teacher t6 = new Teacher("Ronny", "Ruben", "computer science");
+        Teacher t7 = new Teacher("Irena", "Obodobskiy", "mathematics");
 
         ArrayList<Teacher> teachers = new ArrayList<>();
         teachers.add(t1);
@@ -335,4 +347,5 @@ public class Utils {
             db.execSQL("insert into tbl_teacher values(null, '"+t.getName()+"', '"+t.getSurname()+"', '"+t.getSubject()+"')");
         }
     }
+
 }
