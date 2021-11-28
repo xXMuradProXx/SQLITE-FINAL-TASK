@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,7 +27,7 @@ public class Delete_Student extends AppCompatActivity {
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
         et_id = findViewById(R.id.et_id);
-
+        System.out.println("hello");
         btn_delete = findViewById(R.id.btn_delete);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,7 @@ public class Delete_Student extends AppCompatActivity {
                 int id = Integer.parseInt(et_id.getText().toString());
 
                 Utils.deleteStudent(id, db);
+                Log.d("tag", "" + id);
 
                 Intent intent = new Intent(Delete_Student.this, MainActivity.class);
                 startActivity(intent);

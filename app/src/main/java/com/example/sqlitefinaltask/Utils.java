@@ -3,6 +3,7 @@ package com.example.sqlitefinaltask;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,7 @@ public class Utils {
                 TABLE_STUDENT_COL_FIRST_NAME + " text" + ", " +
                 TABLE_STUDENT_COL_LAST_NAME + " text" + ", " +
                 TABLE_STUDENT_COL_CLASS_NAME + " text " + ", " +
-                TABLE_STUDENT_COL_AVG + " real" + ")" );
+                TABLE_STUDENT_COL_AVG + " integer" + ")" );
 
         db.execSQL("create table if not exists " + TABLE_CLASS_NAME + "(" +
                 TABLE_CLASS_COL_ID + " integer primary key autoincrement" + ", " +
@@ -120,9 +121,11 @@ public class Utils {
         return students;
     }
 
-    public static void deleteStudent(int studentId, SQLiteDatabase db){
-        //db.delete(Utils.TABLE_STUDENT_NAME, Utils.TABLE_STUDENT_COL_ID+" =" + studentId, null);
-        db.execSQL("delete from tbl_student where student_id =" + studentId);
+    public static void deleteStudent(int id, SQLiteDatabase db){
+        db.delete(Utils.TABLE_STUDENT_NAME, Utils.TABLE_STUDENT_COL_ID + " = " + id, null);
+        System.out.println("id " + id);
+
+
     }
 
     public static void updateStudent(Student student, SQLiteDatabase db){
@@ -168,7 +171,7 @@ public class Utils {
         Student s2 = new Student("Rafi", "Zagha", "851", 100);
         Student s3 = new Student("Muradik", "TheBest", "851", 100);
         Student s4 = new Student("Alex", "Georgia", "851", 99);
-        Student s5 = new Student("Ash", "Ketchum", "14", 1);
+        Student s5 = new Student("Ash", "Ketchum", "21", 1);
 
 
         ArrayList<Student> students = new ArrayList<>();

@@ -7,6 +7,7 @@
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_add_students_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_all_students_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_delete_student.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_delete_student_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_details_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_main.xml" value="0.264" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_show_students_by_average.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_show_students_by_class.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_show_students_by_name.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_teacher_screen.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_update_student.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/itaim/AndroidStudioProjects/SQLITE-FINAL-TASK/app/src/main/res/layout/activity_update_student_screen.xml" value="0.25416666666666665" />

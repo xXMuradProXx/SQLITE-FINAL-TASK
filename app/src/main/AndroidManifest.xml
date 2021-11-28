@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
+            android:name=".Splash_Screen"
+            android:exported="false" />
+        <activity
             android:name=".Show_Students_By_Average"
             android:exported="false" />
         <activity
