@@ -7,19 +7,19 @@
         android:id="@+id/add_student"
         android:title="Add Student"
         android:orderInCategory="100"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/delete_student"
         android:title="Delete Student"
         android:orderInCategory="200"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/update_student"
         android:title="Update Student"
         android:orderInCategory="300"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/all_students"
@@ -29,7 +29,7 @@
     />
     <item
         android:id="@+id/details"
-        android:title="details"
+        android:title="Details"
         android:orderInCategory="500"
         app:showAsAction="never"
         />

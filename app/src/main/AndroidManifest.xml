@@ -10,22 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
-            android:name=".Update_Student_Screen"
+            android:name=".Show_Students_By_Average"
             android:exported="false" />
         <activity
-            android:name=".Delete_Student_Screen"
+            android:name=".Show_Students_By_Class"
             android:exported="false" />
         <activity
-            android:name=".Teacher_Screen"
+            android:name=".Show_Students_By_Name"
+            android:exported="false" />
+        <activity
+            android:name=".Update_Student"
+            android:exported="false" />
+        <activity
+            android:name=".Delete_Student"
             android:exported="false" />
         <activity
             android:name=".Details_Screen"
             android:exported="false" />
         <activity
-            android:name=".AddStudent_Screen"
+            android:name=".Add_Student"
             android:exported="false" />
         <activity
-            android:name=".Get_Students_Screen"
+            android:name=".Show_All_Students"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

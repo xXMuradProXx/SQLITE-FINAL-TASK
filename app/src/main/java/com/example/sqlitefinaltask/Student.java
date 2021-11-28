@@ -2,49 +2,49 @@ package com.example.sqlitefinaltask;
 
 public class Student {
     private int id;
-    private String name;
-    private String surname;
-    private String className;
+    private String first_name;
+    private String last_name;
+    private String class_name;
     private int avg;
 
-    public Student(String name, String surname, String className,  int avg) {
+    public Student(String name, String last_name, String class_name, int avg) {
         this.id = 0;
-        this.name = name;
-        this.surname = surname;
-        this.className = className;
+        this.first_name = name;
+        this.last_name = last_name;
+        this.class_name = class_name;
         this.avg = avg;
     }
 
-    public Student(int id, String name, String surname, String className, int avg) {
+    public Student(int id, String first_name, String last_name, String class_name, int avg) {
         this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.className = className;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.class_name = class_name;
         this.avg = avg;
     }
 
-    public String getName() {
-        return name;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(String name) {
+        this.first_name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
-    public String getClassName() {
-        return className;
+    public String getClass_name() {
+        return class_name;
     }
 
-    public void setClassName(String className) {
-        this.className = className;
+    public void setClass_name(String class_name) {
+        this.class_name = class_name;
     }
     public int getAvg() {
         return avg;

@@ -38,15 +38,15 @@ public class StudentAdapter extends BaseAdapter {
         Student tmp = students.get(position);
         convertview = LayoutInflater.from(context).inflate(R.layout.row_list_student, null);
 
-        TextView tv_name = convertview.findViewById(R.id.tv_name);
-        TextView tv_surname = convertview.findViewById(R.id.tv_surname);
+        TextView tv_firstname = convertview.findViewById(R.id.tv_firstname);
+        TextView tv_lastname = convertview.findViewById(R.id.tv_lastname);
         TextView tv_class = convertview.findViewById(R.id.tv_class);
-        TextView tv_average = convertview.findViewById(R.id.tv_average);
+        TextView tv_avg = convertview.findViewById(R.id.tv_avg);
 
-        tv_name.setText(tmp.getName());
-        tv_surname.setText(tmp.getSurname());
-        tv_class.setText(tmp.getClassName());
-        tv_average.setText(""+tmp.getAvg());
+        tv_firstname.setText(tmp.getFirst_name());
+        tv_lastname.setText(tmp.getLast_name());
+        tv_class.setText(tmp.getClass_name());
+        tv_avg.setText(""+tmp.getAvg());
 
         return convertview;
     }
