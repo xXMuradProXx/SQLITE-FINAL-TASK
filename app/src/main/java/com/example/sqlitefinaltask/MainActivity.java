@@ -1,6 +1,7 @@
 package com.example.sqlitefinaltask;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,13 +17,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         btn = findViewById(R.id.btn_start);
         db = openOrCreateDatabase(Utils.DB_name, MODE_PRIVATE, null);
         Utils.createTables(db);
-
-        Student i = new Student("Itai", "Maman", "yb8", 70);
-        Utils.addStudent(i, db);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override

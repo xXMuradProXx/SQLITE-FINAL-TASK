@@ -33,22 +33,22 @@ public class Utils {
 
     final static String FILTER_TEXT_KEY = "filter";
     final static String FILTER_KEY = "filter_by";
-    final static String BY_CLASS_VALUE  = "by class";
+    final static String BY_CLASS_VALUE = "by class";
     final static String BY_GRADE_VALUE = "by grade";
 
-    public static void createTables(SQLiteDatabase db){
+    public static void createTables(SQLiteDatabase db) {
 
         db.execSQL("create table if not exists " + TABLE_NAME_STUDENT + "(" +
                 TABLE_STUDENT_COL_ID + " integer primary key autoincrement" + ", " +
                 TABLE_STUDENT_COL_NAME + " text" + ", " +
                 TABLE_STUDENT_COL_SURNAME + " text" + ", " +
                 TABLE_STUDENT_COL_Class + " text " + ", " +
-                TABLE_STUDENT_COL_AVERAGE + " real" + ")" );
+                TABLE_STUDENT_COL_AVERAGE + " real" + ")");
 
         db.execSQL("create table if not exists " + TABLE_NAME_CLASS + "(" +
                 TABLE_CLASS_COL_ID + " integer primary key autoincrement" + ", " +
                 TABLE_CLASS_COL_NAME + " text" + ", " +
-                TABLE_CLASS_COL_TEACHER + " text" + ")" );
+                TABLE_CLASS_COL_TEACHER + " text" + ")");
 
         db.execSQL("create table if not exists " + TABLE_NAME_TEACHER + "(" +
                 TABLE_TEACHER_COL_ID + " integer " + ", " +
@@ -58,28 +58,32 @@ public class Utils {
 
     }
 
-    public static void resetTables(SQLiteDatabase db){
-        db.execSQL("drop table " + Utils.TABLE_NAME_STUDENT);
-        db.execSQL("drop table " + Utils.TABLE_NAME_CLASS);
-        db.execSQL("drop table " + Utils.TABLE_NAME_TEACHER);
-        createTables(db);
+    public static void resetTables(SQLiteDatabase db) {
+        db.execSQL("delete from " + Utils.TABLE_NAME_STUDENT);
+        db.execSQL("delete from " + Utils.TABLE_NAME_CLASS);
+        db.execSQL("delete from " + Utils.TABLE_NAME_TEACHER);
+
+        addStudent(new Student("Rafael", "Zagha", "yb8", 101), db);
+        addStudent(new Student("Roni", "Ruben", "yb3", 80), db);
+        addStudent(new Student("Murad", "Ragimli", "yb8", 54), db);
+
     }
 
-    public static void addStudent(Student s, SQLiteDatabase db){
-        db.execSQL("insert into " + TABLE_NAME_STUDENT + " values( null, '"+
+    public static void addStudent(Student s, SQLiteDatabase db) {
+        db.execSQL("insert into " + TABLE_NAME_STUDENT + " values( null, '" +
                 s.getName() + "', '" +
                 s.getSurname() + "', '" +
                 s.getSt_class() + "', " +
-                s.getAvg() + ")"  );
+                s.getAvg() + ")");
     }
 
     @SuppressLint("range")
-    public static ArrayList<Student> getStudent(String name, SQLiteDatabase db){
+    public static ArrayList<Student> getStudent(String name, SQLiteDatabase db) {
         String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + Utils.TABLE_STUDENT_COL_NAME + " = '" + name + "'";
         Cursor cursor = db.rawQuery(query, null);
 
-        ArrayList<Student> students= new ArrayList<>();
-        while(cursor.moveToNext()){
+        ArrayList<Student> students = new ArrayList<>();
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_ID));
             String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
             String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
@@ -95,12 +99,12 @@ public class Utils {
     }
 
     @SuppressLint("range")
-    public static ArrayList<Student> getHigherAvg(int avg, SQLiteDatabase db){
+    public static ArrayList<Student> getHigherAvg(int avg, SQLiteDatabase db) {
         String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + TABLE_STUDENT_COL_AVERAGE + " > " + avg;
         Cursor cursor = db.rawQuery(query, null);
 
-        ArrayList<Student> students= new ArrayList<>();
-        while(cursor.moveToNext()){
+        ArrayList<Student> students = new ArrayList<>();
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_ID));
             String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
             String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
@@ -115,11 +119,11 @@ public class Utils {
 
     }
 
-    public static void deleteStudent(int id, SQLiteDatabase db){
+    public static void deleteStudent(int id, SQLiteDatabase db) {
         db.delete(Utils.TABLE_NAME_STUDENT, Utils.TABLE_STUDENT_COL_ID + " = " + id, null);
     }
 
-    public static void updateStudent(Student s, SQLiteDatabase db){
+    public static void updateStudent(Student s, SQLiteDatabase db) {
         int id = s.getId();
 
         ContentValues cv = new ContentValues();
@@ -132,12 +136,12 @@ public class Utils {
     }
 
     @SuppressLint({"range", "recycle"})
-    public static ArrayList<Student> getStudents(SQLiteDatabase db){
+    public static ArrayList<Student> getStudents(SQLiteDatabase db) {
 
-       Cursor cursor = db.rawQuery("select * from " + TABLE_NAME_STUDENT, null);
+        Cursor cursor = db.rawQuery("select * from " + TABLE_NAME_STUDENT, null);
         ArrayList<Student> students = new ArrayList<>();
 
-        while(cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             students.add(new Student(cursor.getInt(cursor.getColumnIndex(TABLE_STUDENT_COL_ID)),
                     cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_NAME)),
                     cursor.getString(cursor.getColumnIndex(TABLE_STUDENT_COL_SURNAME)),
@@ -149,12 +153,12 @@ public class Utils {
     }
 
     @SuppressLint("Range")
-    public static Student getStudent(int id, SQLiteDatabase db){
+    public static Student getStudent(int id, SQLiteDatabase db) {
         String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + Utils.TABLE_STUDENT_COL_ID + " = " + id;
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
 
-         String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
+        String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
         String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
         String st_class = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_Class));
         int st_average = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_AVERAGE));
@@ -166,12 +170,12 @@ public class Utils {
     }
 
     @SuppressLint("Range")
-    public static ArrayList<Student> getClassStudents(String st_class, SQLiteDatabase db){
+    public static ArrayList<Student> getClassStudents(String st_class, SQLiteDatabase db) {
         String query = "select * from " + Utils.TABLE_NAME_STUDENT + " where " + TABLE_STUDENT_COL_Class + " = '" + st_class + "'";
         Cursor cursor = db.rawQuery(query, null);
 
-        ArrayList<Student> students= new ArrayList<>();
-        while(cursor.moveToNext()){
+        ArrayList<Student> students = new ArrayList<>();
+        while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_ID));
             String st_name = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_NAME));
             String st_surname = cursor.getString(cursor.getColumnIndex(Utils.TABLE_STUDENT_COL_SURNAME));
@@ -183,8 +187,6 @@ public class Utils {
 
         return students;
     }
-
-
 
 
 

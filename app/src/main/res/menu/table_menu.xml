@@ -16,4 +16,8 @@
         android:title="Remove filter"
         android:id="@+id/reset"
         app:showAsAction="never"/>
+
+    <item android:title="Reset Students"
+        android:id="@+id/reset_students"
+        app:showAsAction="never"/>
 </menu>

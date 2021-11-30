@@ -10,15 +10,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -53,8 +52,6 @@ public class TableActivity extends AppCompatActivity {
         db = openOrCreateDatabase(Utils.DB_name, MODE_PRIVATE, null);
         lv = findViewById(R.id.lv);
         fab = findViewById(R.id.fab);
-        ArrayList<Student> students;
-
         Intent i = getIntent();
         filter = i.getStringExtra(Utils.FILTER_KEY);
         filter_content = i.getStringExtra(Utils.FILTER_TEXT_KEY);
@@ -122,6 +119,9 @@ public class TableActivity extends AppCompatActivity {
             d.show();
         }else if (item_id == R.id.reset){
             startActivity(new Intent(TableActivity.this, TableActivity.class));
+        }else if(item_id == R.id.reset_students){
+            Utils.resetTables(db);
+            startActivity(new Intent(TableActivity.this, TableActivity.class));
         }
 
         return true;
@@ -139,4 +139,13 @@ public class TableActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if(filter == null){
+            startActivity(new Intent(TableActivity.this, MainActivity.class));
+        }
+        else{
+            startActivity(new Intent(TableActivity.this, TableActivity.class));
+        }
+    }
 }
