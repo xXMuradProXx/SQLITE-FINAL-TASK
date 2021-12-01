@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lv_all_students"
+        android:id="@+id/lv_students"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="104dp"
@@ -29,6 +29,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_students_list"/>
+
+    <ListView
+        android:id="@+id/lv_students_by_subjects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="104dp"
+        android:smoothScrollbar="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_students_list" />
 
     <Switch
         android:id="@+id/switch_by_subject"

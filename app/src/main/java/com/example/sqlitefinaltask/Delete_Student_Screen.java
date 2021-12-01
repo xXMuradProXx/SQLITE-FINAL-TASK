@@ -32,13 +32,15 @@ public class Delete_Student_Screen extends AppCompatActivity {
             public void onClick(View view) {
                 int id = Integer.parseInt(et_id.getText().toString());
 
-                    Cursor cursor = db.rawQuery("select student_id from tbl_student where student_id =" + id, null);
+                try {
                     Utils.deleteStudent(id, db);
                     Toast.makeText(Delete_Student_Screen.this, "The Student was successfully deleted from database", Toast.LENGTH_SHORT).show();
-
-
+                }
+                catch(Exception e) {
+                    e.printStackTrace();
                     Toast.makeText(Delete_Student_Screen.this, "The Student not found", Toast.LENGTH_SHORT).show();
 
+                }
             }
         });
     }
