@@ -19,7 +19,10 @@
             android:name=".Delete_Student_Screen"
             android:exported="false" />
         <activity
-            android:name=".Teacher_Screen"
+            android:name=".TeacherScreen"
+            android:exported="false" />
+        <activity
+            android:name=".ClassScreen"
             android:exported="false" />
         <activity
             android:name=".Details_Screen"

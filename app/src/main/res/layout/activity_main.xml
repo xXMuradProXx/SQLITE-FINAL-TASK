@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_classes"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:text="Go to Classes' list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_teachers" />
+
     <EditText
         android:id="@+id/et_class"
         android:layout_width="150dp"
@@ -76,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_teachers"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"

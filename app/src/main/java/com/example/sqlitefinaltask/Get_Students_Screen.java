@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -22,7 +21,6 @@ public class Get_Students_Screen extends AppCompatActivity {
     TextView tv_students_list;
 
     Switch switch_by_subject;
-    Button button;
 
     ListView lv_students;
     ArrayList<Student> students;
@@ -112,14 +110,6 @@ public class Get_Students_Screen extends AppCompatActivity {
         checked = gotten_intent.getBooleanExtra(Utils.INTENT_KEY_CHECKED, false);
         switch_by_subject.setChecked(checked);
 
-        button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Get_Students_Screen.this, Details_Screen.class));
-            }
-        });
-
     }
 
     public void createChoiceDialog(Student student) {
@@ -164,14 +154,17 @@ public class Get_Students_Screen extends AppCompatActivity {
         if(table.equals(Utils.INTENT_KEY_GET_STUDENTS_BY_NAME)){
             String name = gotten_intent.getStringExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME);
             students = Utils.getStudentsByName(name, db);
+            tv_students_list.setText("List of students with name " + name);
         }
         else if(table.equals(Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS)) {
             String className = gotten_intent.getStringExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS_STUDENT_CLASS_NAME);
             students = Utils.getStudentsByClass(className, db);
+            tv_students_list.setText("List of students with class " + className);
         }
         else if(table.equals(Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE)){
             int avg = gotten_intent.getIntExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE, 0);
             students = Utils.getStudentsByHigherAvg(avg, db);
+            tv_students_list.setText("List of students with average mark higher than " + avg);
         }
         else if(table.equals(Utils.INTENT_KEY_GET_STUDENTS)){
             students = new ArrayList<>();

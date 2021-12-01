@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class Teacher_Screen extends AppCompatActivity {
+public class TeacherScreen extends AppCompatActivity {
     ListView lv_teachers;
     TeacherAdapter teacherAdapter;
     ArrayList<Teacher> teachers;
@@ -23,8 +23,6 @@ public class Teacher_Screen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
-        Utils.addDefaultTeachers(db);
-
 
         lv_teachers = findViewById(R.id.lv_teachers);
         teachers = new ArrayList<>();
@@ -44,7 +42,9 @@ public class Teacher_Screen extends AppCompatActivity {
             Teacher teacher = new Teacher(id, name, surname, subject);
             teachers.add(teacher);
         }
-        teacherAdapter = new TeacherAdapter(teachers, Teacher_Screen.this);
+        cursor.close();
+
+        teacherAdapter = new TeacherAdapter(teachers, TeacherScreen.this);
         lv_teachers.setAdapter(teacherAdapter);
         lv_teachers.setOnItemClickListener((adapterView, view, i, l) -> {});
     }

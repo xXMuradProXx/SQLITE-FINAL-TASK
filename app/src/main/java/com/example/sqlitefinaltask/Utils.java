@@ -8,8 +8,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import javax.security.auth.Subject;
-
 public class Utils {
     final static String DATABASE_NAME = "db3";
 
@@ -125,6 +123,7 @@ public class Utils {
                 students.add(student);
             }
         }
+        cursor.close();
         return students;
     }
     public static ArrayList<Student> getStudentsByClass(String studentClassName, SQLiteDatabase db){
@@ -142,6 +141,7 @@ public class Utils {
                 students.add(student);
             }
         }
+        cursor.close();
         return students;
     }
 
@@ -157,6 +157,7 @@ public class Utils {
         Student student = new Student(id, name, surname, studentClassName, avg);
         students.add(student);
 
+        cursor.close();
         return students;
     }
 
@@ -177,6 +178,7 @@ public class Utils {
                 students.add(student);
             }
         }
+        cursor.close();
         return students;
     }
 
@@ -212,7 +214,7 @@ public class Utils {
             Log.d("check", "id: " + id +" class: " + className);
 
             Cursor cursorClass = db.rawQuery("select * from tbl_class", null);
-            String teacher = "";
+            String teacher = "-";
 
             while(cursorClass.moveToNext()){
                 Log.d("check", "entered to first while");
@@ -222,23 +224,25 @@ public class Utils {
                     break;
                 }
             }
-            cursorClass.moveToFirst();
+            cursorClass.close();
             Log.d("check", "class: " + className + " teacher: " + teacher);
 
             Cursor cursorTeacher = db.rawQuery("select * from tbl_teacher", null);
-            String subject = "";
+            String subject = "-";
             while(cursorTeacher.moveToNext()){
                 if(cursorTeacher.getString(1).equals(teacher)){
                     subject = cursorTeacher.getString(3);
                     break;
                 }
             }
+            cursorTeacher.close();
 
             Log.d("check", "teacher: " + teacher +"\n subject: " + subject);
 
             db.execSQL("insert into tbl_subject values("+id+", '"+name+"', '"+surname+"', '"+className+"', "+avg+", '"+subject+"')");
             Log.d("check", "--------------------------------------------------------------");
         }
+        cursorStudent.close();
     }
 
     public static void addDefaultSubjectsv2(SQLiteDatabase db){
@@ -252,18 +256,31 @@ public class Utils {
             String className = cursorStudent.getString(3);
             int avg = cursorStudent.getInt(4);
 
-            Cursor cursorClass = db.rawQuery("select class_teacher from tbl_class where class_name = " + className, null);
-            cursorClass.moveToNext();
-            String teacher = cursorClass.getString(0);
+            String teacher;
+            try {
+                Cursor cursorClass = db.rawQuery("select class_teacher from tbl_class where class_name = " + className, null);
+                cursorClass.moveToNext();
+                teacher = cursorClass.getString(0);
+                cursorClass.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+                teacher = "-";
+            }
 
-            Cursor cursorTeacher = db.rawQuery("select teacher_subject from tbl_teacher where teacher_name = '" + teacher +"'", null);
-            cursorTeacher.moveToNext();
-            String subject = cursorTeacher.getString(0);
-
-            cursorTeacher.moveToFirst();
+            String subject;
+            try {
+                Cursor cursorTeacher = db.rawQuery("select teacher_subject from tbl_teacher where teacher_name = '" + teacher +"'", null);
+                cursorTeacher.moveToNext();
+                subject = cursorTeacher.getString(0);
+                cursorTeacher.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+                subject = "-";
+            }
 
             db.execSQL("insert into tbl_subject values("+id+", '"+name+"', '"+surname+"', '"+className+"', "+avg+", '"+subject+"')");
         }
+        cursorStudent.close();
     }
 
     public static void addDefaultSubjectsv3(SQLiteDatabase db){
@@ -279,22 +296,36 @@ public class Utils {
 
             Log.d("check", "id: " + id +" class: " + className);
 
-            Cursor cursorClass = db.rawQuery("select * from tbl_class where class_name = " + className, null);
-            cursorClass.moveToNext();
-            String teacher = cursorClass.getString(2);
+            String teacher;
+            try {
+                Cursor cursorClass = db.rawQuery("select * from tbl_class where class_name = " + className, null);
+                cursorClass.moveToNext();
+                teacher = cursorClass.getString(2);
+                cursorClass.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+                teacher = "-";
+            }
 
             Log.d("check", "class: " + className + " teacher: " + teacher);
 
-            Cursor cursorTeacher = db.rawQuery("select teacher_subject from tbl_teacher where teacher_name = '" + teacher +"'", null);
-            cursorTeacher.moveToNext();
-            String subject = cursorTeacher.getString(3);
+            String subject;
+            try {
+                Cursor cursorTeacher = db.rawQuery("select * from tbl_teacher where teacher_name = '" + teacher +"'", null);
+                cursorTeacher.moveToNext();
+                subject = cursorTeacher.getString(3);
+                cursorTeacher.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+                subject = "-";
+            }
 
-            cursorTeacher.moveToFirst();
             Log.d("check", "teacher: " + teacher + " subject: " + subject);
 
             db.execSQL("insert into tbl_subject values("+id+", '"+name+"', '"+surname+"', '"+className+"', "+avg+", '"+subject+"')");
             Log.d("check", "--------------------------------------------------------------");
         }
+        cursorStudent.close();
     }
 
     public static ArrayList<Student> addSubjectToStudents(ArrayList<Student> students, SQLiteDatabase db){
@@ -313,6 +344,8 @@ public class Utils {
 
             Student s = new Student(id, name, surname, className, avg, subject);
             added.add(s);
+
+            cursor.close();
         }
 
         return added;
@@ -344,7 +377,7 @@ public class Utils {
         Student s4 = new Student("Rafi", "Albagli Zagha", "815", 100);
         Student s5 = new Student("Someone", "Enoemos", "120", 58);
         Student s6 = new Student("No one", "One no", "844", 0);
-        Student s7 = new Student("Doctor Who", "Who Doctor", "121", 1000);
+        Student s7 = new Student("Doctor Who", "Who Doctor", "582", 1000);
 
         ArrayList<Student> students = new ArrayList<>();
         students.add(s1);
@@ -412,6 +445,7 @@ public class Utils {
             if(cursor.getString(0).equals(className))
                 return true;
         }
+        cursor.close();
         return false;
     }
 
@@ -422,17 +456,19 @@ public class Utils {
         intent.putExtra(INTENT_KEY_GET_STUDENTS, table);
         intent.putExtra(INTENT_KEY_CHECKED, checked);
 
-        if(table.equals(INTENT_KEY_GET_STUDENTS_BY_NAME)){
-            String name = gotten_intent.getStringExtra(INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME);
-            intent.putExtra(INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME, name);
-        }
-        else if(table.equals(INTENT_KEY_GET_STUDENTS_BY_CLASS)) {
-            String className = gotten_intent.getStringExtra(INTENT_KEY_GET_STUDENTS_BY_CLASS_STUDENT_CLASS_NAME);
-            intent.putExtra(INTENT_KEY_GET_STUDENTS_BY_CLASS_STUDENT_CLASS_NAME, className);
-        }
-        else if(table.equals(INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE)){
-            int avg = gotten_intent.getIntExtra(INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE, 0);
-            intent.putExtra(INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE, avg);
+        switch(table) {
+            case INTENT_KEY_GET_STUDENTS_BY_NAME:
+                String name = gotten_intent.getStringExtra(INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME);
+                intent.putExtra(INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME, name);
+                break;
+            case INTENT_KEY_GET_STUDENTS_BY_CLASS:
+                String className = gotten_intent.getStringExtra(INTENT_KEY_GET_STUDENTS_BY_CLASS_STUDENT_CLASS_NAME);
+                intent.putExtra(INTENT_KEY_GET_STUDENTS_BY_CLASS_STUDENT_CLASS_NAME, className);
+                break;
+            case INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE:
+                int avg = gotten_intent.getIntExtra(INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE, 0);
+                intent.putExtra(INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE, avg);
+                break;
         }
 
         return intent;

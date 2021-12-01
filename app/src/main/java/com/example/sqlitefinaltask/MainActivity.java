@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     EditText et_name;
     Button btn_get_students_by_name;
 
-    Button button;
+    Button btn_teachers;
+    Button btn_classes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +98,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button = findViewById(R.id.button);
-        button.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Teacher_Screen.class)));
+        btn_teachers = findViewById(R.id.btn_teachers);
+        btn_teachers.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, TeacherScreen.class)));
+
+        btn_classes = findViewById(R.id.btn_classes);
+        btn_classes.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, ClassScreen.class)));
     }
 
     @Override
