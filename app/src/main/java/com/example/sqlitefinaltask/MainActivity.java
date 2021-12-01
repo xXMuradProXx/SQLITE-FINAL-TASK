@@ -35,62 +35,72 @@ public class MainActivity extends AppCompatActivity {
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
-        Utils.deleteAllTables(db);
-        Utils.createAllTables(db);
-        Utils.addDefaultStudents(db);
-        Utils.addDefaultClasses(db);
-        Utils.addDefaultTeachers(db);
-        //Utils.sortStudentsBySubject(db);
-        Utils.sortStudentsBySubjectv2(db);
-
         et_class = findViewById(R.id.et_class);
 
         btn_get_students_by_class = findViewById(R.id.btn_get_students_by_class);
         btn_get_students_by_class.setOnClickListener(view -> {
+
             String className = et_class.getText().toString().trim();
-            Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
-            intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS);
-            intent.putExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME, className);
             students = Utils.getStudentsByClass(className, db);
-            if(students.isEmpty())
+
+            if(className.isEmpty())
+                Toast.makeText(getApplicationContext(), "Please enter the class", Toast.LENGTH_SHORT).show();
+            else if(!Utils.ifClassExists(className, db))
+                Toast.makeText(MainActivity.this, "Class with this name doesn't exist", Toast.LENGTH_SHORT).show();
+            else if(students.isEmpty())
                 Toast.makeText(MainActivity.this, "There are no students in this class", Toast.LENGTH_SHORT).show();
-            else
+            else{
+                Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
+                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS);
+                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS_STUDENT_CLASS_NAME, className);
                 startActivity(intent);
+            }
         });
 
         et_average = findViewById(R.id.et_average);
 
         btn_get_students_by_higher_average = findViewById(R.id.btn_get_students_by_higher_average);
         btn_get_students_by_higher_average.setOnClickListener(view -> {
+
             int avg = Integer.parseInt(et_average.getText().toString().trim());
-            Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
-            intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE);
-            intent.putExtra(Utils.INTENT_KEY_STUDENT_AVERAGE ,avg);
             students = Utils.getStudentsByHigherAvg(avg, db);
-            if(students.isEmpty())
+
+            if(et_average.getText().toString().isEmpty())
+                Toast.makeText(getApplicationContext(), "Please enter the average mark", Toast.LENGTH_SHORT).show();
+            else if(students.isEmpty())
                 Toast.makeText(MainActivity.this, "There are no students with higher average mark", Toast.LENGTH_SHORT).show();
-            else
+            else{
+                Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
+                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE);
+                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE ,avg);
                 startActivity(intent);
+            }
         });
 
         et_name = findViewById(R.id.et_name);
 
         btn_get_students_by_name = findViewById(R.id.btn_get_students_by_name);
         btn_get_students_by_name.setOnClickListener(view -> {
+
             String name = et_name.getText().toString().trim();
-            Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
-            intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_NAME);
-            intent.putExtra(Utils.INTENT_KEY_STUDENT_NAME, name);
             students = Utils.getStudentsByName(name, db);
-            if(students.isEmpty())
+
+            if(name.isEmpty())
+                Toast.makeText(getApplicationContext(), "Please enter the name", Toast.LENGTH_SHORT).show();
+            else if(students.isEmpty())
                 Toast.makeText(MainActivity.this, "Students with this name are not found", Toast.LENGTH_SHORT).show();
-            else
+            else{
+                Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
+                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_NAME);
+                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME, name);
                 startActivity(intent);
+            }
         });
 
         button = findViewById(R.id.button);
         button.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Teacher_Screen.class)));
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -115,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
         if(selectedId == R.id.all_students){
             intent = new Intent(MainActivity.this, Get_Students_Screen.class);
             intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS);
+            intent.putExtra(Utils.INTENT_KEY_CHECKED, false);
         }
         if(selectedId == R.id.details){
             intent = new Intent(MainActivity.this, Details_Screen.class);
