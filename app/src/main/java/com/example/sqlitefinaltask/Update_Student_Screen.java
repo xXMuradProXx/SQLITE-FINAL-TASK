@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,8 +77,9 @@ public class Update_Student_Screen extends AppCompatActivity {
                     int avg = Integer.parseInt(et_average.getText().toString());
 
                     Student student = new Student(id, name, surname, className, avg);
-
+                    Log.d("updateStudent", "new Student");
                     Utils.updateStudent(student, db);
+
 
                     Toast.makeText(Update_Student_Screen.this, "The information about this student was successfully updated", Toast.LENGTH_SHORT).show();
 

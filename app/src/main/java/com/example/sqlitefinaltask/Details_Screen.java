@@ -62,6 +62,7 @@ public class Details_Screen extends AppCompatActivity {
 
             intent = Utils.defaultIntentToGetStudents(intent, gotten_intent);
 
+            intent.putExtra(Utils.INTENT_KEY_STUDENT_ID, id);
             intent.putExtra(Utils.INTENT_KEY_STUDENT_NAME, name);
             intent.putExtra(Utils.INTENT_KEY_STUDENT_SURNAME, surname);
             intent.putExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME, className);

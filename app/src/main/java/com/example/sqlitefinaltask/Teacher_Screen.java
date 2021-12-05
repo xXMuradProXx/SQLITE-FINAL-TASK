@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -17,25 +19,26 @@ public class Teacher_Screen extends AppCompatActivity {
 
     TextView tv_teachers_list;
     Switch switch_teachers_by_subject;
-    ListView lv_teachers;
-    TeacherAdapter teacherAdapter;
+    ListView lv_unsorted_teachers;
+    ListView lv_sorted_teachers;
+    TeacherAdapter unsortedTeacherAdapter;
     TeacherAdapter sortedTeacherAdapter;
-    ArrayList<Teacher> teachers;
+    ArrayList<Teacher> teacherArrayList;
     ArrayList<Teacher> sorted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_screen);
+        setContentView(R.layout.activity_get_teacher_screen);
 
         getSupportActionBar().hide();
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
         tv_teachers_list = findViewById(R.id.tv_teachers_list);
-        lv_teachers = findViewById(R.id.lv_teachers);
+        lv_unsorted_teachers = findViewById(R.id.lv_unsorted_teachers);
 
-        teachers = new ArrayList<>();
+        teacherArrayList = new ArrayList<>();
 
         Cursor cursor = db.rawQuery("select * from tbl_teacher", null);
         while(cursor.moveToNext()) {
@@ -50,24 +53,37 @@ public class Teacher_Screen extends AppCompatActivity {
             System.out.println(subject);
 
             Teacher teacher = new Teacher(id, name, surname, subject);
-            teachers.add(teacher);
+            teacherArrayList.add(teacher);
         }
-        sorted = Utils.sortTeachers(teachers);
+        for(int i = 0; i < teacherArrayList.size(); i++){
+            Log.d("teachers", teacherArrayList.get(i).getId() + " | "
+                    + teacherArrayList.get(i).getName() + " | "
+                    + teacherArrayList.get(i).getSurname() + " | "
+                    + teacherArrayList.get(i).getSubject());
+        }
 
-        teacherAdapter = new TeacherAdapter(teachers, Teacher_Screen.this);
+        sorted = Utils.sortTeachers(teacherArrayList);
+
+        unsortedTeacherAdapter = new TeacherAdapter(teacherArrayList, Teacher_Screen.this);
         sortedTeacherAdapter = new TeacherAdapter(sorted, Teacher_Screen.this);
 
-        lv_teachers.setAdapter(teacherAdapter);
+        lv_unsorted_teachers.setAdapter(unsortedTeacherAdapter);
+
+        lv_sorted_teachers = findViewById(R.id.lv_sorted_teachers);
+        lv_sorted_teachers.setAdapter(sortedTeacherAdapter);
+        lv_sorted_teachers.setVisibility(View.INVISIBLE);
 
         switch_teachers_by_subject = findViewById(R.id.switch_teachers_by_subject);
         switch_teachers_by_subject.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    lv_teachers.setAdapter(sortedTeacherAdapter);
+                    lv_unsorted_teachers.setVisibility(View.INVISIBLE);
+                    lv_sorted_teachers.setVisibility(View.VISIBLE);
                 }
                 else {
-                    lv_teachers.setAdapter(teacherAdapter);
+                    lv_sorted_teachers.setVisibility(View.INVISIBLE);
+                    lv_unsorted_teachers.setVisibility(View.VISIBLE);
                 }
             }
         });

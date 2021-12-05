@@ -20,14 +20,12 @@ public class Utils {
     final static String TABLE_STUDENT_COL_SURNAME = "student_surname";
     final static String TABLE_STUDENT_COL_CLASS_NAME = "student_class_name";
     final static String TABLE_STUDENT_COL_AVERAGE = "student_average";
-    final static String TABLE_STUDENT_COL_SUBJECT = "student_subject";
 
     final static String INTENT_KEY_STUDENT_ID = "key_student_id";
     final static String INTENT_KEY_STUDENT_NAME = "key_student_name";
     final static String INTENT_KEY_STUDENT_SURNAME = "key_student_surname";
     final static String INTENT_KEY_STUDENT_CLASS_NAME = "key_student_class_name";
     final static String INTENT_KEY_STUDENT_AVERAGE = "key_student_average";
-    final static String INTENT_KEY_STUDENT_SUBJECT = "key_student_subject";
 
     final static String TABLE_CLASS_NAME = "tbl_class";
     final static String TABLE_CLASS_COL_ID = "class_id";
@@ -199,26 +197,10 @@ public class Utils {
         String className = student.getClassName();
         int avg = student.getAvg();
 
-        ContentValues cv = new ContentValues();
-        cv.put(Utils.TABLE_STUDENT_COL_ID, id);
-        cv.put(Utils.TABLE_STUDENT_COL_NAME, name);
-        cv.put(Utils.TABLE_STUDENT_COL_SURNAME, surname);
-        cv.put(Utils.TABLE_STUDENT_COL_CLASS_NAME, className);
-        cv.put(Utils.TABLE_STUDENT_COL_AVERAGE, avg);
-
-        db.update(Utils.TABLE_STUDENT_NAME, cv,  Utils.TABLE_STUDENT_COL_ID + " = " + id, null);
-
-        //db.execSQL("update tbl_student set student_name ='" +name+ "' where student_id =" + id);
-        //db.execSQL("update tbl_student set student_surname ='" +surname+ "' where student_id =" + id);
-        //db.execSQL("update tbl_student set student_class_name ='" +className+ "' where student_id =" + id);
-        //db.execSQL("update tbl_student set student_average =" +avg+ " where student_id =" + id);
-
-        Log.d("check", student.getId() + " | "
-                + student.getName() + " | "
-                + student.getSurname() + " | "
-                + student.getClassName() + " | "
-                + student.getAvg() + " | "
-                + student.getSubject());
+        db.execSQL("update tbl_student set student_name = '" +name+ "' where student_id = " + id);
+        db.execSQL("update tbl_student set student_surname = '" +surname+ "' where student_id = " + id);
+        db.execSQL("update tbl_student set student_class_name = '" +className+ "' where student_id = " + id);
+        db.execSQL("update tbl_student set student_average = " +avg+ " where student_id = " + id);
     }
 
     public static void addDefaultSubjects(SQLiteDatabase db){
