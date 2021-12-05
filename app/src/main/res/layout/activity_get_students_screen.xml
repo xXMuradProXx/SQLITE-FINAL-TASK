@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="All Students' list"
+        android:gravity="center"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_students_list" />
 
     <Switch
-        android:id="@+id/switch_by_subject"
+        android:id="@+id/switch_students_by_subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"

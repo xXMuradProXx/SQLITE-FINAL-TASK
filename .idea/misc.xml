@@ -3,17 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18076923076923077" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_add_students_screen.xml" value="0.2" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_all_students_screen.xml" value="0.33" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_class_screen.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_delete_student_screen.xml" value="0.25" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_details_screen.xml" value="0.1675213675213675" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_get_students_screen.xml" value="0.22" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_details_screen.xml" value="0.25" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_get_students_screen.xml" value="0.16806722689075632" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_splash_screen.xml" value="0.21" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_teacher_screen.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_teacher_screen.xml" value="0.33" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_update_student_screen.xml" value="0.18" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/choise_dialog.xml" value="0.18" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/choise_dialog2.xml" value="0.21" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/content_all_students_screen.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/content_teacher_screen.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/fragment_first.xml" value="0.1675213675213675" />

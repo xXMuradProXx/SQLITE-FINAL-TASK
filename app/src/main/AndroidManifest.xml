@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
+            android:name=".Teacher_Screen"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -17,9 +20,6 @@
             android:exported="false" />
         <activity
             android:name=".Delete_Student_Screen"
-            android:exported="false" />
-        <activity
-            android:name=".TeacherScreen"
             android:exported="false" />
         <activity
             android:name=".ClassScreen"
