@@ -20,6 +20,7 @@ public class Update_Student_Screen extends AppCompatActivity {
     EditText et_average;
     Button btn_update;
 
+    Intent gotten_intent;
     Intent intent;
 
     @Override
@@ -28,6 +29,7 @@ public class Update_Student_Screen extends AppCompatActivity {
         setContentView(R.layout.activity_update_student_screen);
 
         getSupportActionBar().hide();
+
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
         et_id = findViewById(R.id.et_id);
@@ -36,8 +38,10 @@ public class Update_Student_Screen extends AppCompatActivity {
         et_class = findViewById(R.id.et_class);
         et_average = findViewById(R.id.et_average);
 
-        Intent gotten_intent = getIntent();
-        if(!gotten_intent.getBooleanExtra(Utils.INTENT_KEY_SHOW_ID, true)){
+        gotten_intent = getIntent();
+        boolean toShow = gotten_intent.getBooleanExtra(Utils.INTENT_KEY_SHOW_ID, true);
+
+        if(!toShow){
             int id = gotten_intent.getIntExtra(Utils.INTENT_KEY_STUDENT_ID, 0);
             String name = gotten_intent.getStringExtra(Utils.INTENT_KEY_STUDENT_NAME);
             String surname = gotten_intent.getStringExtra(Utils.INTENT_KEY_STUDENT_SURNAME);
@@ -74,6 +78,7 @@ public class Update_Student_Screen extends AppCompatActivity {
                     Student student = new Student(id, name, surname, className, avg);
 
                     Utils.updateStudent(student, db);
+
                     Toast.makeText(Update_Student_Screen.this, "The information about this student was successfully updated", Toast.LENGTH_SHORT).show();
 
                     startActivity(intent);
@@ -84,10 +89,5 @@ public class Update_Student_Screen extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), Get_Students_Screen.class));
     }
 }

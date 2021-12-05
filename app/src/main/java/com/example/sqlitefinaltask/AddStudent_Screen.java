@@ -42,7 +42,7 @@ public class AddStudent_Screen extends AppCompatActivity {
                 student = new Student(name, surname, className, avg);
 
                 Utils.addStudent(student, db);
-                Toast.makeText(getApplicationContext(), "Student " + name + " successfully added", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Student " + name + " was successfully added", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
             catch(NumberFormatException e) {

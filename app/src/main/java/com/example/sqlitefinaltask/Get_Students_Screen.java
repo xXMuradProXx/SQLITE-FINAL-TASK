@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class Get_Students_Screen extends AppCompatActivity {
     TextView tv_students_list;
 
-    Switch switch_by_subject;
+    Switch switch_students_by_subject;
 
     ListView lv_students;
     ArrayList<Student> students;
@@ -32,9 +32,9 @@ public class Get_Students_Screen extends AppCompatActivity {
     SQLiteDatabase db;
 
     Intent gotten_intent;
-    Intent intent;
     Dialog choiceDialog;
-    boolean checked;
+    //boolean checked;
+    String table;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,7 @@ public class Get_Students_Screen extends AppCompatActivity {
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
         gotten_intent = getIntent();
+        table = gotten_intent.getStringExtra(Utils.INTENT_KEY_GET_STUDENTS);
 
         tv_students_list = findViewById(R.id.tv_students_list);
 
@@ -61,14 +62,35 @@ public class Get_Students_Screen extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Student student = students.get(i);
+
+                Intent intent = new Intent(getApplicationContext(), Details_Screen.class);
+
+                intent = Utils.defaultIntentToGetStudents(intent, gotten_intent);
+
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_ID, student.getId());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_NAME, student.getName());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_SURNAME, student.getSurname());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME, student.getClassName());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_AVERAGE, student.getAvg());
+
+                startActivity(intent);
+            }
+        });
+
+        lv_students.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Student student = students.get(i);
                 createChoiceDialog(student);
+
+                return true;
             }
         });
 
         Utils.resetSubjectTable(db);
         Utils.addDefaultSubjectsv2(db);
         ArrayList<Student> added = Utils.addSubjectToStudents(students, db);
-        ArrayList<Student> sorted = Utils.sort(added);
+        ArrayList<Student> sorted = Utils.sortStudents(added);
         Log.d("check", "The size of added " + sorted.size());
         for(int i=0; i < sorted.size(); i++){
             Log.d("check", sorted.get(i).getId() + " | "
@@ -80,35 +102,56 @@ public class Get_Students_Screen extends AppCompatActivity {
         }
         subjectAdapter = new SubjectAdapter(sorted, Get_Students_Screen.this);
         lv_students_by_subject.setAdapter(subjectAdapter);
+
         lv_students_by_subject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Student student = students.get(i);
-                createChoiceDialog(student);
+                Student student = sorted.get(i);
+
+                Intent intent = new Intent(getApplicationContext(), Details_Screen.class);
+
+                intent = Utils.defaultIntentToGetStudents(intent, gotten_intent);
+
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_ID, student.getId());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_NAME, student.getName());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_SURNAME, student.getSurname());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME, student.getClassName());
+                intent.putExtra(Utils.INTENT_KEY_STUDENT_AVERAGE, student.getAvg());
+
+                startActivity(intent);
             }
         });
 
-        switch_by_subject = findViewById(R.id.switch_by_subject);
-        switch_by_subject.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        lv_students_by_subject.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Student student = sorted.get(i);
+                createChoiceDialog(student);
+
+                return true;
+            }
+        });
+
+        switch_students_by_subject = findViewById(R.id.switch_students_by_subject);
+        switch_students_by_subject.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     lv_students.setVisibility(View.INVISIBLE);
                     lv_students_by_subject.setVisibility(View.VISIBLE);
 
-                    checked = true;
+                    Utils.checked = true;
                 }
                 else {
                     lv_students_by_subject.setVisibility(View.INVISIBLE);
                     lv_students.setVisibility(View.VISIBLE);
 
-                    checked = false;
+                    Utils.checked = false;
                 }
-
             }
         });
-        checked = gotten_intent.getBooleanExtra(Utils.INTENT_KEY_CHECKED, false);
-        switch_by_subject.setChecked(checked);
+
+        switch_students_by_subject.setChecked(Utils.checked);
 
     }
 
@@ -119,8 +162,9 @@ public class Get_Students_Screen extends AppCompatActivity {
 
         TextView tv_update = choiceDialog.findViewById(R.id.tv_update);
         tv_update.setOnClickListener(view -> {
-            intent = new Intent(this, Update_Student_Screen.class);
-            intent.putExtra(Utils.INTENT_KEY_SHOW_ID, false);
+            Intent intent = new Intent(this, Update_Student_Screen.class);
+
+            intent = Utils.defaultIntentToGetStudents(intent, gotten_intent);
 
             intent.putExtra(Utils.INTENT_KEY_STUDENT_ID, student.getId());
             intent.putExtra(Utils.INTENT_KEY_STUDENT_NAME, student.getName());
@@ -128,7 +172,6 @@ public class Get_Students_Screen extends AppCompatActivity {
             intent.putExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME, student.getClassName());
             intent.putExtra(Utils.INTENT_KEY_STUDENT_AVERAGE, student.getAvg());
 
-            intent = Utils.defaultIntentToGetStudents(intent, gotten_intent);
 
             startActivity(intent);
             choiceDialog.dismiss();
@@ -138,7 +181,8 @@ public class Get_Students_Screen extends AppCompatActivity {
         tv_delete.setOnClickListener(view -> {
             Utils.deleteStudent(student.getId(), db);
 
-            intent = new Intent(getApplicationContext(), Get_Students_Screen.class);
+            Intent intent = new Intent(getApplicationContext(), Get_Students_Screen.class);
+
             intent = Utils.defaultIntentToGetStudents(intent, gotten_intent);
 
             startActivity(intent);
@@ -149,11 +193,11 @@ public class Get_Students_Screen extends AppCompatActivity {
     }
 
     public ArrayList<Student> getStudentsByIntent(Intent gotten_intent){
-        String table = gotten_intent.getStringExtra(Utils.INTENT_KEY_GET_STUDENTS);
 
         if(table.equals(Utils.INTENT_KEY_GET_STUDENTS_BY_NAME)){
             String name = gotten_intent.getStringExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_NAME_STUDENT_NAME);
             students = Utils.getStudentsByName(name, db);
+            String str = "" + name;
             tv_students_list.setText("List of students with name " + name);
         }
         else if(table.equals(Utils.INTENT_KEY_GET_STUDENTS_BY_CLASS)) {

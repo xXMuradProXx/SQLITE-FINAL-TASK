@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Utils.checked = false;
+
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
         et_class = findViewById(R.id.et_class);
@@ -63,18 +65,20 @@ public class MainActivity extends AppCompatActivity {
         btn_get_students_by_higher_average = findViewById(R.id.btn_get_students_by_higher_average);
         btn_get_students_by_higher_average.setOnClickListener(view -> {
 
-            int avg = Integer.parseInt(et_average.getText().toString().trim());
-            students = Utils.getStudentsByHigherAvg(avg, db);
-
             if(et_average.getText().toString().isEmpty())
                 Toast.makeText(getApplicationContext(), "Please enter the average mark", Toast.LENGTH_SHORT).show();
-            else if(students.isEmpty())
-                Toast.makeText(MainActivity.this, "There are no students with higher average mark", Toast.LENGTH_SHORT).show();
             else{
-                Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
-                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE);
-                intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE ,avg);
-                startActivity(intent);
+                int avg = Integer.parseInt(et_average.getText().toString().trim());
+                students = Utils.getStudentsByHigherAvg(avg, db);
+
+                if(students.isEmpty())
+                    Toast.makeText(MainActivity.this, "There are no students with higher average mark", Toast.LENGTH_SHORT).show();
+                else{
+                    Intent intent = new Intent(MainActivity.this, Get_Students_Screen.class);
+                    intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE);
+                    intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS_BY_HIGHER_AVERAGE_STUDENT_AVERAGE ,avg);
+                    startActivity(intent);
+                }
             }
         });
 

@@ -9,20 +9,25 @@ import android.util.Log;
 import java.util.ArrayList;
 
 public class Utils {
-    final static String DATABASE_NAME = "db3";
+    static boolean checked = false;
+
+    final static String DATABASE_NAME = "db4";
 
     final static String TABLE_STUDENT_NAME = "tbl_student";
+
     final static String TABLE_STUDENT_COL_ID = "student_id";
     final static String TABLE_STUDENT_COL_NAME = "student_name";
     final static String TABLE_STUDENT_COL_SURNAME = "student_surname";
     final static String TABLE_STUDENT_COL_CLASS_NAME = "student_class_name";
     final static String TABLE_STUDENT_COL_AVERAGE = "student_average";
+    final static String TABLE_STUDENT_COL_SUBJECT = "student_subject";
 
     final static String INTENT_KEY_STUDENT_ID = "key_student_id";
     final static String INTENT_KEY_STUDENT_NAME = "key_student_name";
     final static String INTENT_KEY_STUDENT_SURNAME = "key_student_surname";
     final static String INTENT_KEY_STUDENT_CLASS_NAME = "key_student_class_name";
     final static String INTENT_KEY_STUDENT_AVERAGE = "key_student_average";
+    final static String INTENT_KEY_STUDENT_SUBJECT = "key_student_subject";
 
     final static String TABLE_CLASS_NAME = "tbl_class";
     final static String TABLE_CLASS_COL_ID = "class_id";
@@ -41,7 +46,7 @@ public class Utils {
     final static String TABLE_SUBJECT_COL_STUDENT_SURNAME = "student_surname";
     final static String TABLE_SUBJECT_COL_CLASS_NAME = "student_class_name";
     final static String TABLE_SUBJECT_COL_AVERAGE = "student_average";
-    final static String TABLE_SUBJECT_COL_SUBJECT = "subject";
+    final static String TABLE_SUBJECT_COL_SUBJECT = "student_subject";
 
 
     final static String INTENT_KEY_GET_STUDENTS = "get_students";
@@ -194,10 +199,26 @@ public class Utils {
         String className = student.getClassName();
         int avg = student.getAvg();
 
-        db.execSQL("update tbl_student set student_name ='" +name+ "' where student_id=" + id);
-        db.execSQL("update tbl_student set student_surname ='" +surname+ "' where student_id=" + id);
-        db.execSQL("update tbl_student set student_class_name ='" +className+ "' where student_id=" + id);
-        db.execSQL("update tbl_student set student_average =" +avg+ " where student_id=" + id);
+        ContentValues cv = new ContentValues();
+        cv.put(Utils.TABLE_STUDENT_COL_ID, id);
+        cv.put(Utils.TABLE_STUDENT_COL_NAME, name);
+        cv.put(Utils.TABLE_STUDENT_COL_SURNAME, surname);
+        cv.put(Utils.TABLE_STUDENT_COL_CLASS_NAME, className);
+        cv.put(Utils.TABLE_STUDENT_COL_AVERAGE, avg);
+
+        db.update(Utils.TABLE_STUDENT_NAME, cv,  Utils.TABLE_STUDENT_COL_ID + " = " + id, null);
+
+        //db.execSQL("update tbl_student set student_name ='" +name+ "' where student_id =" + id);
+        //db.execSQL("update tbl_student set student_surname ='" +surname+ "' where student_id =" + id);
+        //db.execSQL("update tbl_student set student_class_name ='" +className+ "' where student_id =" + id);
+        //db.execSQL("update tbl_student set student_average =" +avg+ " where student_id =" + id);
+
+        Log.d("check", student.getId() + " | "
+                + student.getName() + " | "
+                + student.getSurname() + " | "
+                + student.getClassName() + " | "
+                + student.getAvg() + " | "
+                + student.getSubject());
     }
 
     public static void addDefaultSubjects(SQLiteDatabase db){
@@ -351,7 +372,7 @@ public class Utils {
         return added;
     }
 
-    public static ArrayList<Student> sort(ArrayList<Student> students){
+    public static ArrayList<Student> sortStudents(ArrayList<Student> students){
         ArrayList<Student> sorted = new ArrayList<>();
 
         while(!students.isEmpty()){
@@ -361,6 +382,25 @@ public class Utils {
             while(!students.isEmpty() && students.size() > 1 && j<students.size()){
                 if(tmp.getSubject().equals(students.get(j).getSubject())){
                     sorted.add(students.remove(j));
+                    j--;
+                }
+                j++;
+            }
+        }
+
+        return sorted;
+    }
+
+    public static ArrayList<Teacher> sortTeachers(ArrayList<Teacher> teachers){
+        ArrayList<Teacher> sorted = new ArrayList<>();
+
+        while(!teachers.isEmpty()){
+            int j = 0;
+            Teacher tmp = teachers.remove(0);
+            sorted.add(tmp);
+            while(!teachers.isEmpty() && teachers.size() > 1 && j<teachers.size()){
+                if(tmp.getSubject().equals(teachers.get(j).getSubject())){
+                    sorted.add(teachers.remove(j));
                     j--;
                 }
                 j++;
@@ -451,10 +491,8 @@ public class Utils {
 
     public static Intent defaultIntentToGetStudents(Intent intent, Intent gotten_intent){
         String table = gotten_intent.getStringExtra(INTENT_KEY_GET_STUDENTS);
-        boolean checked = gotten_intent.getBooleanExtra(INTENT_KEY_CHECKED, false);
 
         intent.putExtra(INTENT_KEY_GET_STUDENTS, table);
-        intent.putExtra(INTENT_KEY_CHECKED, checked);
 
         switch(table) {
             case INTENT_KEY_GET_STUDENTS_BY_NAME:
