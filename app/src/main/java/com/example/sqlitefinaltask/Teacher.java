@@ -1,6 +1,9 @@
 package com.example.sqlitefinaltask;
 
-public class Teacher {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Teacher implements Parcelable {
     private int id;
     private String name;
     private String surname;
@@ -19,6 +22,25 @@ public class Teacher {
         this.surname = surname;
         this.subject = subject;
     }
+
+    protected Teacher(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        surname = in.readString();
+        subject = in.readString();
+    }
+
+    public static final Creator<Teacher> CREATOR = new Creator<Teacher>() {
+        @Override
+        public Teacher createFromParcel(Parcel in) {
+            return new Teacher(in);
+        }
+
+        @Override
+        public Teacher[] newArray(int size) {
+            return new Teacher[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -50,5 +72,18 @@ public class Teacher {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(name);
+        parcel.writeString(surname);
+        parcel.writeString(subject);
     }
 }

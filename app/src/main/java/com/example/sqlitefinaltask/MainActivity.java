@@ -133,10 +133,14 @@ public class MainActivity extends AppCompatActivity {
         if(selectedId == R.id.all_students){
             intent = new Intent(MainActivity.this, Get_Students_Screen.class);
             intent.putExtra(Utils.INTENT_KEY_GET_STUDENTS, Utils.INTENT_KEY_GET_STUDENTS);
-            intent.putExtra(Utils.INTENT_KEY_CHECKED, false);
         }
         if(selectedId == R.id.details){
             intent = new Intent(MainActivity.this, Details_Screen.class);
+            Student student = new Student(520, "DFs", "Dfsdf", "895", 102);
+            Teacher teacher = new Teacher(1502, "sadsda", "dasdas", "dassa");
+            intent.putExtra(Utils.INTENT_KEY_STUDENT, student);
+            intent.putExtra(Utils.INTENT_KEY_TEACHER, teacher);
+
         }
         startActivity(intent);
         return true;

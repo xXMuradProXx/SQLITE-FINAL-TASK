@@ -60,7 +60,11 @@ public class Utils {
 
     final static String INTENT_KEY_SHOW_ID = "to show student_id";
 
-    final static String INTENT_KEY_CHECKED = "to check switch";
+    final static String INTENT_KEY_STUDENT = "students";
+
+    final static String INTENT_KEY_TEACHER = "teacher";
+
+
 
 
     public static void createAllTables(SQLiteDatabase db){
@@ -492,6 +496,36 @@ public class Utils {
         }
 
         return intent;
+    }
+
+    public static ArrayList<Student> SQLPractice(SQLiteDatabase db){
+        ArrayList<Student> students = new ArrayList<>();
+
+        db.execSQL("select * from tbl_student");
+
+        db.execSQL("select * from tbl_student where student_average =" + 100);
+
+        db.execSQL("select * from tbl_student where student_average =" + 100 + "and student_class_name = '" + 844 + "'");
+
+        db.execSQL("select * from tbl_student where student_class_name like '%" + 4 + "'");
+
+        db.execSQL("select student_id, student_name from tbl_student where student_average =" + 100);
+
+        db.execSQL("select * from tbl_student where student_class_name is null");
+
+        db.execSQL("update tbl_student set student_average =" + 100 + " where student_id =" + 5);
+
+        db.execSQL("update tbl_student set student_class_name ='" + 800 + "' where student_class_name is null ");
+
+        db.execSQL("select * from tbl_student where student_class_name = '" + 844 + "' and student_class_name = " + 0 + " or " + 100);
+
+        db.execSQL("update tbl_student set student_average =" + 1000 + " where student_class_name ='" + 851+ "' or student_class_name ='" + 815+ "'");
+
+        db.execSQL("update tbl_student set student_average = student_average + " + 100 + " where student_id = " + 1);
+
+
+
+        return students;
     }
 
 }
