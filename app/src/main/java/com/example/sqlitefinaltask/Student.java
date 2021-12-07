@@ -6,10 +6,11 @@ public class Student {
     private String last_name;
     private String class_name;
     private int avg;
+    private String subject;
 
-    public Student(String name, String last_name, String class_name, int avg) {
+    public Student(String first_name, String last_name, String class_name, int avg) {
         this.id = 0;
-        this.first_name = name;
+        this.first_name = first_name;
         this.last_name = last_name;
         this.class_name = class_name;
         this.avg = avg;
@@ -23,12 +24,21 @@ public class Student {
         this.avg = avg;
     }
 
+    public Student(int id, String first_name, String last_name, String class_name, int avg, String subject) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.class_name = class_name;
+        this.avg = avg;
+        this.subject = subject;
+    }
+
     public String getFirst_name() {
         return first_name;
     }
 
-    public void setFirst_name(String name) {
-        this.first_name = name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
     public String getLast_name() {
@@ -61,4 +71,13 @@ public class Student {
     public void setId(int id) {
         this.id = id;
     }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 }

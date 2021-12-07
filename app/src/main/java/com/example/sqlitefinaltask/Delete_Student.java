@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,7 +34,6 @@ public class Delete_Student extends AppCompatActivity {
                 int id = Integer.parseInt(et_id.getText().toString());
 
                 Utils.deleteStudent(id, db);
-                Log.d("tag", "" + id);
 
                 Intent intent = new Intent(Delete_Student.this, MainActivity.class);
                 startActivity(intent);

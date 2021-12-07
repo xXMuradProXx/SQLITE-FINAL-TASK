@@ -21,7 +21,7 @@ public class Splash_Screen extends AppCompatActivity {
 
         //Utils.deleteAllTables(db);
         Utils.createAllTables(db);
-        Utils.addDefaultStudents(db);
+        Utils.DefaultStudents(db);
 
         btn_enter = findViewById(R.id.btn_enter);
         btn_enter.setOnClickListener(new View.OnClickListener() {

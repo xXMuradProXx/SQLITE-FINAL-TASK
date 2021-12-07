@@ -30,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
         db = openOrCreateDatabase(Utils.DATABASE_NAME, MODE_PRIVATE, null);
 
-        //Utils.deleteAllTables(db);
-        //Utils.createAllTables(db);
-        //Utils.addDefaultStudents(db);
+        Utils.deleteAllTables(db);
+        Utils.createAllTables(db);
+        Utils.DefaultStudents(db);
+        Utils.DefaultTeachers(db);
+        Utils.DefaultClasses(db);
 
         et_firstname = findViewById(R.id.et_firstname);
 
@@ -106,10 +108,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if(selectedId == R.id.all_students){
             Intent intent = new Intent(MainActivity.this, Show_All_Students.class);
-            startActivity(intent);
-        }
-        if(selectedId == R.id.details){
-            Intent intent = new Intent(MainActivity.this, Details_Screen.class);
             startActivity(intent);
         }
 

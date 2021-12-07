@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLITEFINALTASK">
         <activity
+            android:name=".Sorted_Students"
+            android:exported="false" />
+        <activity
             android:name=".Splash_Screen"
             android:exported="false" />
         <activity
@@ -26,9 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".Delete_Student"
-            android:exported="false" />
-        <activity
-            android:name=".Details_Screen"
             android:exported="false" />
         <activity
             android:name=".Add_Student"

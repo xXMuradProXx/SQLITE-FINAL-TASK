@@ -4,21 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Show_Students_By_Average">
+    tools:context=".Sorted_Students">
 
     <TextView
-        android:id="@+id/tv_students_list_by_average"
+        android:id="@+id/tv_sorted_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Students List By Average"
+        android:text="Sorted list"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/lv_students_by_average"
+        android:id="@+id/lv_sorted"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="104dp"
@@ -26,16 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_students_list_by_average"/>
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:textSize="12sp"
-        android:text="Sort"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_sorted_list"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
