@@ -1,6 +1,7 @@
 package com.example.sqlitefinaltask;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn_teachers;
     Button btn_classes;
+    Button btn_recycler_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,10 +105,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_teachers = findViewById(R.id.btn_teachers);
-        btn_teachers.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, RecyclerViewTesting.class)));
+        btn_teachers.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Teacher_Screen.class)));
 
         btn_classes = findViewById(R.id.btn_classes);
         btn_classes.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, ClassScreen.class)));
+
+        btn_recycler_view = findViewById(R.id.btn_recycler_view);
+        btn_recycler_view.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, RecyclerViewTesting.class)));
     }
 
     @Override

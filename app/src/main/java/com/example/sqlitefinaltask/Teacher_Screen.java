@@ -31,9 +31,6 @@ public class Teacher_Screen extends AppCompatActivity {
     TeacherAdapter sortedTeacherAdapter;
     ArrayList<Teacher> sorted;
 
-    RecyclerView rv_teachers;
-    //TeacherListAdapterForRecyclerView teacherListAdapterForRecyclerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,22 +68,13 @@ public class Teacher_Screen extends AppCompatActivity {
 
         sorted = Utils.sortTeachers(teacherArrayList);
 
-        //lv_unsorted_teachers = findViewById(R.id.lv_unsorted_teachers);
-        //lv_unsorted_teachers.clearAnimation();
-        //lv_unsorted_teachers.setVisibility(View.VISIBLE);
-        //unsortedTeacherAdapter = new TeacherAdapter(teacherArrayList, Teacher_Screen.this);
-        //lv_unsorted_teachers.setAdapter(unsortedTeacherAdapter);
+        lv_unsorted_teachers = findViewById(R.id.lv_unsorted_teachers);
+        lv_unsorted_teachers.clearAnimation();
+        lv_unsorted_teachers.setVisibility(View.VISIBLE);
+        unsortedTeacherAdapter = new TeacherAdapter(teacherArrayList, Teacher_Screen.this);
+        lv_unsorted_teachers.setAdapter(unsortedTeacherAdapter);
 
-        // Get a handle to the RecyclerView.
-        /*rv_teachers = findViewById(R.id.rv_teachers);
-        // Create an adapter and supply the data to be displayed.
-        teacherListAdapterForRecyclerView = new TeacherListAdapterForRecyclerView(getApplicationContext(), teacherArrayList);
-        // Connect the adapter with the RecyclerView.
-        rv_teachers.setAdapter(teacherListAdapterForRecyclerView);
-        // Give the RecyclerView a default layout manager.
-        rv_teachers.setLayoutManager(new LinearLayoutManager(this));*/
-
-        /*lv_sorted_teachers = findViewById(R.id.lv_sorted_teachers);
+        lv_sorted_teachers = findViewById(R.id.lv_sorted_teachers);
         lv_sorted_teachers.clearAnimation();
         lv_sorted_teachers.setVisibility(View.GONE);
         sortedTeacherAdapter = new TeacherAdapter(sorted, Teacher_Screen.this);
@@ -98,15 +86,15 @@ public class Teacher_Screen extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 Toast.makeText(getApplicationContext(), "isChecked: " + switch_teachers_by_subject.isChecked(), Toast.LENGTH_SHORT).show();
                 if(b){
-                    //lv_unsorted_teachers.setVisibility(View.GONE);
+                    lv_unsorted_teachers.setVisibility(View.GONE);
                     lv_sorted_teachers.setVisibility(View.VISIBLE);
                 }
                 else {
-                    //lv_unsorted_teachers.setVisibility(View.VISIBLE);
-                    lv_sorted_teachers.setVisibility(View.INVISIBLE);
+                    lv_unsorted_teachers.setVisibility(View.VISIBLE);
+                    lv_sorted_teachers.setVisibility(View.GONE);
                 }
             }
         });
-        switch_teachers_by_subject.setChecked(false);*/
+        switch_teachers_by_subject.setChecked(false);
     }
 }

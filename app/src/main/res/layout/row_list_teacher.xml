@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Name"
+        android:textColor="#6A1B9A"
         android:textSize="18dp" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Surname"
+        android:textColor="#6A1B9A"
         android:textSize="18dp" />
 
     <TextView
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Subject"
+        android:textColor="#6A1B9A"
         android:textSize="18dp" />
 
 </LinearLayout>

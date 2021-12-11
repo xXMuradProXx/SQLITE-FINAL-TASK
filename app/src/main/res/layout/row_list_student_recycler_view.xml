@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="20sp"
+    android:layout_height="24sp"
     android:gravity="center"
     >
 
@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="hjghfgf"
-        android:textColor="#43FFFFFF"
-        android:textSize="18sp" />
+        android:textColor="#6A1B9A"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_surname"
@@ -20,8 +20,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text=""
-        android:textColor="#43FFFFFF"
-        android:textSize="18sp" />
+        android:textColor="#6A1B9A"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_class"
@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text=""
-        android:textColor="#43FFFFFF"
-        android:textSize="18sp" />
+        android:textColor="#6A1B9A"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_average"
@@ -38,6 +38,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text=""
-        android:textColor="#43FFFFFF"
-        android:textSize="18sp" />
+        android:textColor="#6A1B9A"
+        android:textSize="20sp" />
 </LinearLayout>

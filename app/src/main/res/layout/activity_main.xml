@@ -1,29 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_classes"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:text="Go to Classes' list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_teachers" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/et_class"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="24dp"
         android:hint="Enter Class"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,25 +25,23 @@
         android:id="@+id/btn_get_students_by_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Get Students By Class"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/et_class"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="@+id/et_class"
-        app:layout_constraintTop_toBottomOf="@+id/et_class"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintTop_toBottomOf="@+id/et_class" />
 
     <EditText
         android:id="@+id/et_average"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="28dp"
         android:hint="Enter Average Mark"
         android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/et_class"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="@+id/et_class"
-        app:layout_constraintTop_toBottomOf="@+id/et_class" />
+        app:layout_constraintEnd_toEndOf="@+id/btn_get_students_by_class"
+        app:layout_constraintStart_toStartOf="@+id/btn_get_students_by_class"
+        app:layout_constraintTop_toBottomOf="@+id/btn_get_students_by_class"
+        />
 
     <Button
         android:id="@+id/btn_get_students_by_higher_average"
@@ -57,19 +49,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Get Students With Higher Average Mark"
-        app:layout_constraintStart_toStartOf="@+id/et_average"
         app:layout_constraintEnd_toEndOf="@+id/et_average"
+        app:layout_constraintStart_toStartOf="@+id/et_average"
         app:layout_constraintTop_toBottomOf="@+id/et_average" />
 
     <EditText
         android:id="@+id/et_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:hint="Enter name"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="@+id/btn_get_students_by_higher_average"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/btn_get_students_by_higher_average"
         app:layout_constraintTop_toBottomOf="@+id/btn_get_students_by_higher_average" />
 
@@ -80,8 +71,6 @@
         android:layout_marginTop="28dp"
         android:text="get students by this name"
         app:layout_constraintEnd_toEndOf="@+id/et_name"
-
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="@+id/et_name"
         app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
@@ -89,9 +78,77 @@
         android:id="@+id/btn_teachers"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="Go to Teachers' list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_get_students_by_name" />
+
+    <Button
+        android:id="@+id/btn_classes"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:text="Go to Classes' list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_teachers" />
+
+    <Button
+        android:id="@+id/btn_recycler_view"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="Go to RecyclerView Screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_classes" />
+
+    <Button
+        android:id="@+id/btn_recycler_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="Go to RecyclerView Screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_recycler_view" />
+
+    <Button
+        android:id="@+id/btn_recycler_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="Go to RecyclerView Screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_recycler_view2" />
+
+    <Button
+        android:id="@+id/btn_recycler_view4"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="Go to RecyclerView Screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_recycler_view3" />
+
+    <Button
+        android:id="@+id/btn_recycler_view5"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="Go to RecyclerView Screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_recycler_view4" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
