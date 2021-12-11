@@ -10,8 +10,10 @@
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_delete_student_screen.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_details_screen.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_get_students_screen.xml" value="0.16806722689075632" />
-        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_get_teacher_screen.xml" value="0.1675213675213675" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_get_teacher_screen.xml" value="0.25" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_get_teacher_screen2.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_recycler_view_testing.xml" value="0.21" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_splash_screen.xml" value="0.21" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_teacher_screen.xml" value="0.13445378151260504" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/activity_update_student_screen.xml" value="0.18" />
@@ -23,8 +25,10 @@
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_class.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_student.xml" value="0.25" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_student_recycler_view.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_subject.xml" value="0.25" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_teacher.xml" value="0.25" />
+        <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/layout/row_list_teacher2.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/acer/AndroidStudioProjects/SQLITEFINALTASK/app/src/main/res/menu/menu.xml" value="0.25" />
       </map>
     </option>

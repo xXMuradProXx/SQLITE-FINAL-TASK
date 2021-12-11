@@ -42,13 +42,6 @@ public class Details_Screen extends AppCompatActivity {
         String className = gotten_intent.getStringExtra(Utils.INTENT_KEY_STUDENT_CLASS_NAME);
         int avg = gotten_intent.getIntExtra(Utils.INTENT_KEY_STUDENT_AVERAGE, 0);
 
-        Student student = (Student) gotten_intent.getSerializableExtra(Utils.INTENT_KEY_STUDENT);
-        Teacher teacher = gotten_intent.getParcelableExtra(Utils.INTENT_KEY_TEACHER);
-
-        Log.d("check", student.getId() + " | " + student.getName()  + " | " + student.getSurname()  + " | " + student.getClassName() + " | " + student.getAvg() + " | " + student.getSubject());
-        Log.d("check", teacher.getId() + " | " + teacher.getName()  + " | " + teacher.getSurname()  + " | " + teacher.getSubject());
-
-
         tv_id = findViewById(R.id.tv_id);
         tv_name = findViewById(R.id.tv_name);
         tv_surname = findViewById(R.id.tv_surname);

@@ -30,5 +30,17 @@ public class SplashScreen extends AppCompatActivity {
         Utils.addDefaultStudents(db);
         Utils.addDefaultClasses(db);
         Utils.addDefaultTeachers(db);
+        Utils.addDefaultStudents(db);
+        Utils.addDefaultClasses(db);
+        Utils.addDefaultTeachers(db);
+        Utils.addDefaultStudents(db);
+        Utils.addDefaultClasses(db);
+        Utils.addDefaultTeachers(db);
+        Utils.addDefaultStudents(db);
+        Utils.addDefaultClasses(db);
+        Utils.addDefaultTeachers(db);
+        Utils.addDefaultStudents(db);
+        Utils.addDefaultClasses(db);
+        Utils.addDefaultTeachers(db);
     }
 }

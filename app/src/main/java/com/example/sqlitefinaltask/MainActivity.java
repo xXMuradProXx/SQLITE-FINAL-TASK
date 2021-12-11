@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_teachers = findViewById(R.id.btn_teachers);
-        btn_teachers.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Teacher_Screen.class)));
+        btn_teachers.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, RecyclerViewTesting.class)));
 
         btn_classes = findViewById(R.id.btn_classes);
         btn_classes.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, ClassScreen.class)));
@@ -136,11 +136,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if(selectedId == R.id.details){
             intent = new Intent(MainActivity.this, Details_Screen.class);
-            Student student = new Student(520, "DFs", "Dfsdf", "895", 102);
-            Teacher teacher = new Teacher(1502, "sadsda", "dasdas", "dassa");
-            intent.putExtra(Utils.INTENT_KEY_STUDENT, student);
-            intent.putExtra(Utils.INTENT_KEY_TEACHER, teacher);
-
         }
         startActivity(intent);
         return true;
